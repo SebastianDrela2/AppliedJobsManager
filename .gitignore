@@ -1,0 +1,14 @@
+# Ignore build-related directories and files
+/bin/
+/obj/
+/ReplayResults/
+/build/
+/packages/
+.vs/
+.idea/
+
+# Ignore build artifacts and configuration files
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
