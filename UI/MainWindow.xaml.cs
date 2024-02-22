@@ -58,10 +58,10 @@ namespace AppliedJobsManager.UI
         {
             _invalidRowsRemover.RemoveInvalidRows();
             _jsonJobsManager.SaveJobs(_dataItems);
-        }    
+        }
     }
 
-    public struct DataItem
+    public class DataItem
     {
         public string Link { get; set; }
         public string Job { get; set; }
