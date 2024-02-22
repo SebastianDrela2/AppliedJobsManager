@@ -5,6 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="JobManager" Height="450" Width="800" Closing="OnWindowClosing">
+    <Window.Resources>
+        <Style x:Key="CellTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="TextBlock.FontSize" Value="16" />
+        </Style>
+    </Window.Resources>
     <StackPanel>
         <Grid Margin="0 10 0 10">
             <Grid.ColumnDefinitions>
@@ -26,9 +36,9 @@
             <DataGrid x:Name="_dataGrid" 
                       AutoGenerateColumns="False"
                       FontSize="15"
-                      FontFamily="Arial"
-                      
+                      FontFamily="Arial"                    
                       ItemsSource="{Binding DataItems}">
+                
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Link" Width="2*" Binding="{Binding Link}" />
                     <DataGridTextColumn Header="Job" Width="*" Binding="{Binding Job}" />

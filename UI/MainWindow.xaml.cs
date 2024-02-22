@@ -53,7 +53,18 @@ namespace AppliedJobsManager.UI
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
+            RemoveCorruptedRows();
             _jsonJobsManager.SaveJobs(_dataItems);
+        }
+
+        private void RemoveCorruptedRows()
+        {
+            var corruptedDataItems = DataItems.Where(x => x.Date is null || x.Job is null || x.Pay is null || x.Date is null);
+
+            foreach(var corruptedItem in corruptedDataItems)
+            {
+                DataItems.Remove(corruptedItem);
+            }
         }
     }
 
