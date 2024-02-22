@@ -30,7 +30,7 @@ namespace AppliedJobsManager.UI
             InitializeComponent();
             _jsonJobsManager = new JsonJobsManager();
 
-            DataItems = _jsonJobsManager.LoadJobs();
+            _dataItems = _jsonJobsManager.LoadJobs();
             DataContext = this;
 
         }
@@ -42,28 +42,29 @@ namespace AppliedJobsManager.UI
 
         private void OnAddRowClicked(object sender, RoutedEventArgs e)
         {
-            DataItems.Add(new DataItem());
+            _dataItems.Add(new DataItem());
         }
 
         private void OnDeleteRowClicked(object sender, RoutedEventArgs e)
         {
             var dataItem = (DataItem)_dataGrid.SelectedItem ;
-            DataItems.Remove(dataItem);
+            _dataItems.Remove(dataItem);
         }
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
             RemoveCorruptedRows();
+
             _jsonJobsManager.SaveJobs(_dataItems);
         }
 
         private void RemoveCorruptedRows()
         {
-            var corruptedDataItems = DataItems.Where(x => x.Date is null || x.Job is null || x.Pay is null).ToList();
+            var corruptedDataItems = _dataItems.Where(x => x.Date is null || x.Job is null || x.Pay is null || x.Link is null).ToList();
 
             foreach (var corruptedItem in corruptedDataItems)
             {
-                DataItems.Remove(corruptedItem);
+                _dataItems.Remove(corruptedItem);
             }
         }
     }
