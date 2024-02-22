@@ -35,14 +35,33 @@
         <Grid>
             <DataGrid x:Name="_dataGrid" 
                       AutoGenerateColumns="False"
-                      FontSize="15"
-                      FontFamily="Arial"                    
+                      FontSize="15"                      
+                      FontFamily="Arial"
+                      FontWeight="Bold"
                       ItemsSource="{Binding DataItems}">
                 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Link" Width="2*" Binding="{Binding Link}" />
-                    <DataGridTextColumn Header="Job" Width="*" Binding="{Binding Job}" />
-                    <DataGridTextColumn Header="Pay" Width="*" Binding="{Binding Pay}" />
+                    <DataGridTextColumn Header="Link" Width="2*" Binding="{Binding Link}">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Job" Width="*" Binding="{Binding Job}">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Pay" Width="*" Binding="{Binding Pay}">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Date}" />
                 </DataGrid.Columns>
             </DataGrid>
