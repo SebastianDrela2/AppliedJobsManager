@@ -13,6 +13,7 @@ internal class JsonJobsManager
     {
         CreateDirectoryIfDoesntExist();
     }
+
     public ObservableCollection<DataItem> LoadJobs()
     {
         if (File.Exists(_jsonAppDataPath))
@@ -47,5 +48,4 @@ internal class JsonJobsManager
             Directory.CreateDirectory(aboveDir!);
         }
     }
-
 }

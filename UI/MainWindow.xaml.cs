@@ -35,7 +35,6 @@ namespace AppliedJobsManager.UI
             _invalidRowsRemover = new InvalidRowsRemover(_dataItems);
 
             DataContext = this;
-
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
