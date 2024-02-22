@@ -36,7 +36,7 @@ namespace AppliedJobsManager.DataManagement
 
         private void RemoveInvalidPays()
         {
-            var invalidPays = _dataItems.Where(x => x.Pay is null || !int.TryParse(x.Date, out _)).ToList();
+            var invalidPays = _dataItems.Where(x => x.Pay is null || !int.TryParse(x.Pay, out _)).ToList();
 
             foreach (var invalidPay in invalidPays)
             {
