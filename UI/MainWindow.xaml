@@ -23,7 +23,12 @@
         </Grid>
         
         <Grid>
-            <DataGrid x:Name="_dataGrid" AutoGenerateColumns="False" ItemsSource="{Binding DataItems}">
+            <DataGrid x:Name="_dataGrid" 
+                      AutoGenerateColumns="False"
+                      FontSize="15"
+                      FontFamily="Arial"
+                      
+                      ItemsSource="{Binding DataItems}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Link" Width="2*" Binding="{Binding Link}" />
                     <DataGridTextColumn Header="Job" Width="*" Binding="{Binding Job}" />
