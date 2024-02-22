@@ -18,7 +18,10 @@ internal class JsonJobsManager
         if (File.Exists(_jsonAppDataPath))
         {
             var json = File.ReadAllText(_jsonAppDataPath);
-            var dataItems = JsonConvert.DeserializeObject<ObservableCollection<DataItem>>(json);
+            var dataItems = JsonConvert.DeserializeObject<ObservableCollection<DataItem>>(json, new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented
+            });
 
             if (dataItems is not null)
             {
