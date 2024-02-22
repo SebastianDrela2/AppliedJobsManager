@@ -69,7 +69,7 @@ namespace AppliedJobsManager.UI
         }
     }
 
-    public class DataItem
+    public struct DataItem
     {
         public string Link { get; set; }
         public string Job { get; set; }
