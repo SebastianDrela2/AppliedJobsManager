@@ -59,9 +59,9 @@ namespace AppliedJobsManager.UI
 
         private void RemoveCorruptedRows()
         {
-            var corruptedDataItems = DataItems.Where(x => x.Date is null || x.Job is null || x.Pay is null || x.Date is null);
+            var corruptedDataItems = DataItems.Where(x => x.Date is null || x.Job is null || x.Pay is null).ToList();
 
-            foreach(var corruptedItem in corruptedDataItems)
+            foreach (var corruptedItem in corruptedDataItems)
             {
                 DataItems.Remove(corruptedItem);
             }
