@@ -4,15 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="JobManager" Height="450" Width="800">
-    <Grid>
-        <DataGrid x:Name="_dataGrid" AutoGenerateColumns="False" ItemsSource="{Binding DataItems}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Link" Width="2*" Binding="{Binding Link}" />
-                <DataGridTextColumn Header="Job" Width="*" Binding="{Binding Job}" />
-                <DataGridTextColumn Header="Pay" Width="*" Binding="{Binding Pay}" />
-                <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Date}" />
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+        Title="JobManager" Height="450" Width="800" Closing="OnWindowClosing">
+    <StackPanel>
+        <Grid Margin="0 10 0 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="_buttonAddRow" Content="ADD ROW" Grid.Column="1" Click="OnAddRowClicked"/>
+            <Button x:Name="_buttonDeleteRow" Content="DELETE ROW" Grid.Column="3" Click="OnDeleteRowClicked"/>
+        </Grid>
+        
+        <Grid>
+            <DataGrid x:Name="_dataGrid" AutoGenerateColumns="False" ItemsSource="{Binding DataItems}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Link" Width="2*" Binding="{Binding Link}" />
+                    <DataGridTextColumn Header="Job" Width="*" Binding="{Binding Job}" />
+                    <DataGridTextColumn Header="Pay" Width="*" Binding="{Binding Pay}" />
+                    <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Date}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </StackPanel>
 </Window>

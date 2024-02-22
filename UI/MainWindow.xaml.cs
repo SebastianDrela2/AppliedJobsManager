@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using AppliedJobsManager.DataManagement;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 
@@ -10,6 +11,7 @@ namespace AppliedJobsManager.UI
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private ObservableCollection<DataItem> _dataItems;
+        private readonly JsonJobsManager _jsonJobsManager;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -26,18 +28,32 @@ namespace AppliedJobsManager.UI
         public MainWindow()
         {
             InitializeComponent();
-            
-            DataItems = new ObservableCollection<DataItem>
-            {
-                new() { Link = "Value1", Job = "Value2", Pay = "Value3", Date = "Value4" },
-            };
+            _jsonJobsManager = new JsonJobsManager();
 
+            DataItems = _jsonJobsManager.LoadJobs();
             DataContext = this;
 
         }
+
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OnAddRowClicked(object sender, RoutedEventArgs e)
+        {
+            DataItems.Add(new DataItem());
+        }
+
+        private void OnDeleteRowClicked(object sender, RoutedEventArgs e)
+        {
+            var dataItem = (DataItem)_dataGrid.SelectedItem ;
+            DataItems.Remove(dataItem);
+        }
+
+        private void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            _jsonJobsManager.SaveJobs(_dataItems);
         }
     }
 
