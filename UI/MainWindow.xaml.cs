@@ -12,6 +12,7 @@ namespace AppliedJobsManager.UI
     {
         private ObservableCollection<DataItem> _dataItems;
         private readonly JsonJobsManager _jsonJobsManager;
+        private readonly InvalidRowsRemover _invalidRowsRemover;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -28,9 +29,11 @@ namespace AppliedJobsManager.UI
         public MainWindow()
         {
             InitializeComponent();
-            _jsonJobsManager = new JsonJobsManager();
 
+            _jsonJobsManager = new JsonJobsManager();
             _dataItems = _jsonJobsManager.LoadJobs();
+            _invalidRowsRemover = new InvalidRowsRemover(_dataItems);
+
             DataContext = this;
 
         }
@@ -53,20 +56,9 @@ namespace AppliedJobsManager.UI
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            RemoveCorruptedRows();
-
+            _invalidRowsRemover.RemoveInvalidRows();
             _jsonJobsManager.SaveJobs(_dataItems);
-        }
-
-        private void RemoveCorruptedRows()
-        {
-            var corruptedDataItems = _dataItems.Where(x => x.Date is null || x.Job is null || x.Pay is null || x.Link is null).ToList();
-
-            foreach (var corruptedItem in corruptedDataItems)
-            {
-                _dataItems.Remove(corruptedItem);
-            }
-        }
+        }    
     }
 
     public struct DataItem
