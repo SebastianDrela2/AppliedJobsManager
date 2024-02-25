@@ -14,12 +14,12 @@ internal class JsonJobsManager
         CreateDirectoryIfDoesntExist();
     }
 
-    public ObservableCollection<DataItem> LoadJobs()
+    public ObservableCollection<Row> LoadJobs()
     {
         if (File.Exists(_jsonAppDataPath))
         {
             var json = File.ReadAllText(_jsonAppDataPath);
-            var dataItems = JsonConvert.DeserializeObject<ObservableCollection<DataItem>>(json, new JsonSerializerSettings
+            var dataItems = JsonConvert.DeserializeObject<ObservableCollection<Row>>(json, new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented
             });
@@ -30,10 +30,10 @@ internal class JsonJobsManager
             }
         }
 
-        return new ObservableCollection<DataItem>();
+        return new ObservableCollection<Row>();
     }
 
-    public void SaveJobs(ObservableCollection<DataItem> dataItems)
+    public void SaveJobs(ObservableCollection<Row> dataItems)
     {
         var json = JsonConvert.SerializeObject(dataItems);
         File.WriteAllText(_jsonAppDataPath, json);

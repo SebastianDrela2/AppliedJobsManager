@@ -5,45 +5,40 @@ namespace AppliedJobsManager.DataManagement
 {
     internal class InvalidRowsRemover
     {
-        private readonly ObservableCollection<DataItem> _dataItems;
-        public InvalidRowsRemover(ObservableCollection<DataItem> dataItems)
+        private readonly ObservableCollection<Row> _dataItems;
+        public InvalidRowsRemover(ObservableCollection<Row> dataItems)
         {
             _dataItems = dataItems;
         }
 
         public void RemoveInvalidRows()
         {
-            var corruptedDataItems = _dataItems.Where(RowHasUnnacceptableNulls).ToList();
+            var invalidRows = _dataItems.Where(IsInvalidRow).ToList();
 
-            foreach (var corruptedItem in corruptedDataItems)
+            foreach (var invalidRow in invalidRows)
             {
-                _dataItems.Remove(corruptedItem);
-            }
-
-            RemoveInvalidDates();
-            RemoveInvalidPays();
+                _dataItems.Remove(invalidRow);
+            }         
         }
-
-        private bool RowHasUnnacceptableNulls(DataItem row) => row.Job is null || row.Link is null || row.Description is null;
-
-        private void RemoveInvalidDates()
+              
+        private bool IsInvalidRow(Row dataItem)
         {
-            var invalidDates = _dataItems.Where(x => x.Date is null || !DateTime.TryParse(x.Date, out _)).ToList();
-
-            foreach (var invalidDate in invalidDates)
+            if (dataItem.Job is null || dataItem.Link is null)
             {
-                _dataItems.Remove(invalidDate);
+                return true;
             }
-        }
 
-        private void RemoveInvalidPays()
-        {
-            var invalidPays = _dataItems.Where(x => x.Pay is null || !int.TryParse(x.Pay, out _)).ToList();
-
-            foreach (var invalidPay in invalidPays)
+            if (dataItem.Date is null || !DateTime.TryParse(dataItem.Date, out _))
             {
-                _dataItems.Remove(invalidPay);
+                return true;
             }
+
+            if (dataItem.Pay is null || !int.TryParse(dataItem.Pay, out _))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

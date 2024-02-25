@@ -10,13 +10,13 @@ namespace AppliedJobsManager.UI
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        private ObservableCollection<DataItem> _dataItems;
+        private ObservableCollection<Row> _dataItems;
         private readonly JsonJobsManager _jsonJobsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public ObservableCollection<DataItem> DataItems
+        public ObservableCollection<Row> DataItems
         {
             get => _dataItems;
             set
@@ -44,12 +44,21 @@ namespace AppliedJobsManager.UI
 
         private void OnAddRowClicked(object sender, RoutedEventArgs e)
         {
-            _dataItems.Add(new DataItem());
+            _dataItems.Add(new Row());
         }
 
         private void OnDeleteRowClicked(object sender, RoutedEventArgs e)
         {
-            var dataItem = (DataItem)_dataGrid.SelectedItem ;
+            Row dataItem = null;
+            try
+            {
+                dataItem = (Row)_dataGrid.SelectedItem;
+            }
+            catch(InvalidCastException)
+            {
+                // selected row is invalid, handle this later.
+            }
+
             _dataItems.Remove(dataItem);
         }
 
@@ -60,7 +69,7 @@ namespace AppliedJobsManager.UI
         }
     }
 
-    public class DataItem
+    public class Row
     {
         public string Link { get; set; }
         public string Job { get; set; }
