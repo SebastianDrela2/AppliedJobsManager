@@ -13,6 +13,7 @@ namespace AppliedJobsManager.UI
         private ObservableCollection<Row> _dataItems;
         private readonly JsonJobsManager _jsonJobsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
+        private readonly InvalidRowsNotifier _invalidRowsNotifier;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -33,6 +34,7 @@ namespace AppliedJobsManager.UI
             _jsonJobsManager = new JsonJobsManager();
             _dataItems = _jsonJobsManager.LoadJobs();
             _invalidRowsRemover = new InvalidRowsRemover(_dataItems);
+            _invalidRowsNotifier = new InvalidRowsNotifier();
 
             DataContext = this;
         }
@@ -63,8 +65,10 @@ namespace AppliedJobsManager.UI
         }
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
-        {
-            _invalidRowsRemover.RemoveInvalidRows();
+        {          
+            var invalidRows = _invalidRowsRemover.ManageInvalidRows();
+
+            _invalidRowsNotifier.Notify(invalidRows);
             _jsonJobsManager.SaveJobs(_dataItems);
         }
     }

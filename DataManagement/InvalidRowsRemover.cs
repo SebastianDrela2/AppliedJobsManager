@@ -11,14 +11,16 @@ namespace AppliedJobsManager.DataManagement
             _dataItems = dataItems;
         }
 
-        public void RemoveInvalidRows()
+        public List<Row> ManageInvalidRows()
         {
-            var invalidRows = _dataItems.Where(IsInvalidRow).ToList();
+            var corruptedDataItems = _dataItems.Where(IsInvalidRow).ToList();
 
-            foreach (var invalidRow in invalidRows)
+            foreach (var corruptedItem in corruptedDataItems)
             {
-                _dataItems.Remove(invalidRow);
-            }         
+                _dataItems.Remove(corruptedItem);
+            }
+
+            return corruptedDataItems;
         }
               
         private bool IsInvalidRow(Row dataItem)
