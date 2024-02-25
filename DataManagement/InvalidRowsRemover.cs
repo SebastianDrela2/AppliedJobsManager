@@ -13,7 +13,7 @@ namespace AppliedJobsManager.DataManagement
 
         public void RemoveInvalidRows()
         {
-            var corruptedDataItems = _dataItems.Where(x => x.Job is null || x.Link is null).ToList();
+            var corruptedDataItems = _dataItems.Where(RowHasUnnacceptableNulls).ToList();
 
             foreach (var corruptedItem in corruptedDataItems)
             {
@@ -23,6 +23,8 @@ namespace AppliedJobsManager.DataManagement
             RemoveInvalidDates();
             RemoveInvalidPays();
         }
+
+        private bool RowHasUnnacceptableNulls(DataItem row) => row.Job is null || row.Link is null || row.Description is null;
 
         private void RemoveInvalidDates()
         {

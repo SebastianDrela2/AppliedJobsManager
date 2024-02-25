@@ -55,6 +55,13 @@
                             </Style>
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
+                    <DataGridTextColumn Header="Description" Width="3*" Binding="{Binding Description}">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="Foreground" Value="Green"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Header="Pay" Width="*" Binding="{Binding Pay}">
                         <DataGridTextColumn.CellStyle>
                             <Style TargetType="DataGridCell">
