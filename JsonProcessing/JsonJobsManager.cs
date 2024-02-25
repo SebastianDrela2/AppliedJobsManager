@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.IO;
 
-namespace AppliedJobsManager.DataManagement;
+namespace AppliedJobsManager.JsonProcessing;
 
 internal class JsonJobsManager
 {
