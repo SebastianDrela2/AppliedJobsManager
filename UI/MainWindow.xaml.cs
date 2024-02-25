@@ -52,6 +52,7 @@ namespace AppliedJobsManager.UI
         private void OnDeleteRowClicked(object sender, RoutedEventArgs e)
         {
             Row dataItem = null;
+
             try
             {
                 dataItem = (Row)_dataGrid.SelectedItem;
@@ -61,14 +62,15 @@ namespace AppliedJobsManager.UI
                 // selected row is invalid, handle this later.
             }
 
-            _dataItems.Remove(dataItem);
+            _dataItems.Remove(dataItem);           
         }
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {          
+            var previousItems = _dataGrid.Items.Cast<object>().ToList();
             var invalidRows = _invalidRowsRemover.ManageInvalidRows();
 
-            _invalidRowsNotifier.Notify(invalidRows);
+            _invalidRowsNotifier.Notify(invalidRows, previousItems);
             _jsonJobsManager.SaveJobs(_dataItems);
         }
     }
