@@ -16,7 +16,7 @@
         </Style>
     </Window.Resources>
     <StackPanel>
-        <Grid>
+        <Grid Background="WhiteSmoke">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
