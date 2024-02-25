@@ -5,7 +5,7 @@ using System.IO;
 
 namespace AppliedJobsManager.JsonProcessing;
 
-internal class JsonJobsManager
+internal class JsonJobsManager : IJsonSettings
 {
     private readonly string _jsonAppDataPath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\JobsManager\jobs.json";
 
@@ -39,7 +39,7 @@ internal class JsonJobsManager
         File.WriteAllText(_jsonAppDataPath, json);
     }
 
-    private void CreateDirectoryIfDoesntExist()
+    public void CreateDirectoryIfDoesntExist()
     {
         var aboveDir = Path.GetDirectoryName(_jsonAppDataPath);
 

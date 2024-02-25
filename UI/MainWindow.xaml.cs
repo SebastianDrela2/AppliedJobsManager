@@ -1,4 +1,5 @@
 ﻿using AppliedJobsManager.DataManagement;
+using AppliedJobsManager.JsonProcessing;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -14,6 +15,7 @@ namespace AppliedJobsManager.UI
         private readonly JsonJobsManager _jsonJobsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
         private readonly InvalidRowsNotifier _invalidRowsNotifier;
+        private readonly Settings.Settings _settings;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -35,6 +37,9 @@ namespace AppliedJobsManager.UI
             _dataItems = _jsonJobsManager.LoadJobs();
             _invalidRowsRemover = new InvalidRowsRemover(_dataItems);
             _invalidRowsNotifier = new InvalidRowsNotifier();
+            var jsonSettingsManager = new JsonSettingsManager();
+
+            _settings = jsonSettingsManager.LoadSettings();
 
             DataContext = this;
         }
@@ -66,12 +71,21 @@ namespace AppliedJobsManager.UI
         }
 
         private void OnWindowClosing(object sender, CancelEventArgs e)
-        {          
-            var previousItems = _dataGrid.Items.Cast<object>().ToList();
-            var invalidRows = _invalidRowsRemover.ManageInvalidRows();
+        {
+            if (_settings.RemoveInvalidRows)
+            {
+                var previousItems = _dataGrid.Items.Cast<object>().ToList();
+                var invalidRows = _invalidRowsRemover.ManageInvalidRows();
 
-            _invalidRowsNotifier.Notify(invalidRows, previousItems);
-            _jsonJobsManager.SaveJobs(_dataItems);
+                _invalidRowsNotifier.Notify(invalidRows, previousItems);
+                _jsonJobsManager.SaveJobs(_dataItems);
+            }
+        }
+
+        private void OnSettingsMenuItemClicked(object sender, RoutedEventArgs e)
+        {
+            var settingsWindow = new SettingsWindow(_settings, new JsonSettingsManager());
+            settingsWindow.Show();
         }
     }
 
