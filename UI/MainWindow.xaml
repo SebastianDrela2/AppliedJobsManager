@@ -14,6 +14,14 @@
         <Style TargetType="DataGridCell">
             <Setter Property="TextBlock.FontSize" Value="16" />
         </Style>
+
+        <Style x:Key="HighlightRowStyle" TargetType="DataGridCell">
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <StackPanel>
         <Grid Background="WhiteSmoke">
@@ -49,7 +57,8 @@
                       FontSize="15"                      
                       FontFamily="Arial"
                       FontWeight="Bold"
-                      ItemsSource="{Binding DataItems}">
+                      ItemsSource="{Binding DataItems}"
+                      CellStyle="{StaticResource HighlightRowStyle}">
                 
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Link" Width="2*" Binding="{Binding Link}">
