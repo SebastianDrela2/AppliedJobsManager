@@ -40,6 +40,7 @@ namespace AppliedJobsManager.UI
             var jsonSettingsManager = new JsonSettingsManager();
 
             _settings = jsonSettingsManager.LoadSettings();
+            LoadColumnWidthsIfPossible();
 
             DataContext = this;
         }
@@ -84,8 +85,23 @@ namespace AppliedJobsManager.UI
 
         private void OnSettingsMenuItemClicked(object sender, RoutedEventArgs e)
         {
-            var settingsWindow = new SettingsWindow(_settings, new JsonSettingsManager());
+            var settingsWindow = new SettingsWindow(_settings, new JsonSettingsManager(), _dataGrid);
             settingsWindow.Show();
+        }
+        
+        private void LoadColumnWidthsIfPossible()
+        {
+            if (_settings.SaveColumnWidths)
+            {
+                var index = 0;
+
+                foreach (var column in _dataGrid.Columns)
+                {
+                    column.Width = _settings.ColumnsWidths[index];
+                    index++;
+                }
+               
+            }
         }
     }
 

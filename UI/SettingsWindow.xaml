@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppliedJobsManager.UI"
         mc:Ignorable="d"
-        Title="Settings" Height="120" Width="215" WindowStartupLocation="CenterOwner">
+        Title="Settings" Height="120" Width="300" WindowStartupLocation="CenterScreen">
     <StackPanel>
       <Grid Margin="0 5 0 0">
         <Grid.ColumnDefinitions>
@@ -20,15 +20,16 @@
         </Grid.RowDefinitions>
           
         <CheckBox x:Name="_invalidRowsCheckBox" Grid.Column="1" Grid.Row="0" Content="Remove invalid rows."/>
-          
-      </Grid>
+        <CheckBox x:Name="_saveColumnsWidths" Grid.Column="1" Grid.Row="1" Content="Save column widths."/>
+
+        </Grid>
 
         <Grid Margin="0 0 0 5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5"/>
             </Grid.ColumnDefinitions>
                 
