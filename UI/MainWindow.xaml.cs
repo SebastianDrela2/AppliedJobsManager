@@ -15,6 +15,7 @@ namespace AppliedJobsManager.UI
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private ObservableCollection<Row> _dataItems;
+
         private readonly JsonJobsManager _jsonJobsManager;
         private readonly JsonSettingsManager _jsonSettingsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
