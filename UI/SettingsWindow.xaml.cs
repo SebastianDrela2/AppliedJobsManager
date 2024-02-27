@@ -2,9 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Drawing.Text;
-using System.Windows.Forms;
 using System.Windows.Media;
-using System.Drawing;
 using AppliedJobsManager.Settings;
 
 namespace AppliedJobsManager.UI

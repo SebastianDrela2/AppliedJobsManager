@@ -1,6 +1,5 @@
 ﻿using AppliedJobsManager.UI;
 using System.Text;
-using System.Windows;
 
 namespace AppliedJobsManager.DataManagement
 {
