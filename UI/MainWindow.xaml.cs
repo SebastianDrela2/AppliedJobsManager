@@ -3,6 +3,8 @@ using AppliedJobsManager.JsonProcessing;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace AppliedJobsManager.UI
 {
@@ -97,6 +99,25 @@ namespace AppliedJobsManager.UI
             var settingsWindow = new SettingsWindow(_settings, new JsonSettingsManager(), _dataGrid, LoadSettings);
             settingsWindow.Show();
         }
+
+        private void LoadRowHightlightColorIfPossible()
+        {
+            if (_settings.RowHightlightColor is not null)
+            {
+                var cellStyle = new Style(typeof(DataGridCell));
+
+                var isSelectedTrigger = new Trigger
+                {
+                    Property = DataGridCell.IsSelectedProperty,
+                    Value = true
+                };
+
+                isSelectedTrigger.Setters.Add(new Setter(BackgroundProperty, (SolidColorBrush)_settings.RowHightlightColor));
+                cellStyle.Triggers.Add(isSelectedTrigger);
+              
+                _dataGrid.CellStyle = cellStyle;
+            }
+        }
         
         private void LoadColumnWidthsIfPossible()
         {
@@ -115,11 +136,12 @@ namespace AppliedJobsManager.UI
         private void LoadSettings()
         {
             LoadColumnWidthsIfPossible();
+            LoadRowHightlightColorIfPossible();
 
             if (!string.IsNullOrEmpty(_settings.Font))
             {
                 _dataGrid.FontFamily = new System.Windows.Media.FontFamily(_settings.Font);
-            }
+            }           
         }
     }
 

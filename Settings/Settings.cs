@@ -4,8 +4,9 @@
     {
         public bool RemoveInvalidRows { get; set; }
         public bool SaveColumnWidths { get; set; }
+        public string Font;
+        public System.Windows.Media.Brush RowHightlightColor;
 
-        public List<double> ColumnsWidths { get; set; }
-        public string Font { get; set; }
+        public List<double> ColumnsWidths { get; set; }       
     }
 }

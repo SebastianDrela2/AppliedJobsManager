@@ -22,7 +22,7 @@ namespace AppliedJobsManager.DataManagement
                 stringBuilder.Append($"Removed Row {index + 1} because of {reason} {column} \n");
             }
             
-            MessageBox.Show(stringBuilder.ToString());
+            System.Windows.MessageBox.Show(stringBuilder.ToString());
         }
 
         private (string, NotifyReason) GetNotifyReason(Row row)

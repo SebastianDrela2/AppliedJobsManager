@@ -2,6 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Drawing.Text;
+using System.Windows.Forms;
+using System.Windows.Media;
+using System.Drawing;
 
 namespace AppliedJobsManager.UI
 {
@@ -13,8 +16,9 @@ namespace AppliedJobsManager.UI
         private readonly JsonSettingsManager _jsonSettingsManager;       
         private readonly DataGrid _dataGrid;
         private readonly Action _loadSettings;
-
+       
         private Settings.Settings _settings;
+
         public SettingsWindow(Settings.Settings settings, JsonSettingsManager jsonSettingsManager, DataGrid dataGrid, Action loadSettings)
         {
             InitializeComponent();
@@ -64,7 +68,8 @@ namespace AppliedJobsManager.UI
                 RemoveInvalidRows = (bool)_invalidRowsCheckBox.IsChecked!,
                 SaveColumnWidths = (bool)_saveColumnsWidthsCheckBox.IsChecked!,
                 ColumnsWidths = _dataGrid.Columns.Select(x => x.ActualWidth).ToList(),
-                Font = _fontsComboBox.SelectedItem.ToString()!               
+                Font = _fontsComboBox.SelectedItem.ToString()!,
+                RowHightlightColor = _rowHighlightColorTextbox.Background
             };
 
             _jsonSettingsManager.SaveSettings(settingsToSave);
@@ -77,6 +82,21 @@ namespace AppliedJobsManager.UI
         private void OnCancelButtonClicked(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+        
+        private void OnTextBoxClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var colorDialog = new ColorDialog();
+
+            if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                _rowHighlightColorTextbox.Background = new SolidColorBrush(ConvertColorToMediaColor(colorDialog.Color));
+            }
+        }
+
+        private System.Windows.Media.Color ConvertColorToMediaColor(System.Drawing.Color color)
+        {
+            return System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
         }
     }
 }
