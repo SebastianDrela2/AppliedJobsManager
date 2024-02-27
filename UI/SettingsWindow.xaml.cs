@@ -39,6 +39,11 @@ namespace AppliedJobsManager.UI
             PopulateFonts();
             _fontsComboBox.SelectedItem = GetFont();
 
+            if (_settings.RowHightlightColor is not null)
+            {
+                _rowHighlightColorTextbox.Background = _settings.RowHightlightColor;
+            }
+
         }
 
         private void PopulateFonts()
@@ -63,7 +68,7 @@ namespace AppliedJobsManager.UI
 
         private void OnOkButtonClicked(object sender, RoutedEventArgs e)
         {
-            var settingsToSave = new Settings.Settings
+            var newSettings = new Settings.Settings
             {
                 RemoveInvalidRows = (bool)_invalidRowsCheckBox.IsChecked!,
                 SaveColumnWidths = (bool)_saveColumnsWidthsCheckBox.IsChecked!,
@@ -72,9 +77,8 @@ namespace AppliedJobsManager.UI
                 RowHightlightColor = _rowHighlightColorTextbox.Background
             };
 
-            _jsonSettingsManager.SaveSettings(settingsToSave);
-            _settings = settingsToSave;
-            _loadSettings();
+            _jsonSettingsManager.SaveSettings(newSettings);           
+            _loadSettings();                    
 
             Close();
         }

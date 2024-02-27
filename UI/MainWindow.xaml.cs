@@ -42,8 +42,7 @@ namespace AppliedJobsManager.UI
             _invalidRowsRemover = new InvalidRowsRemover(_dataItems);
             _invalidRowsNotifier = new InvalidRowsNotifier();
             _jsonSettingsManager = new JsonSettingsManager();
-
-            _settings = _jsonSettingsManager.GetSettings();
+           
             LoadSettings();
 
             DataContext = this;
@@ -112,7 +111,7 @@ namespace AppliedJobsManager.UI
                     Value = true
                 };
 
-                isSelectedTrigger.Setters.Add(new Setter(BackgroundProperty, (SolidColorBrush)_settings.RowHightlightColor));
+                isSelectedTrigger.Setters.Add(new Setter(BackgroundProperty, (SolidColorBrush) _settings.RowHightlightColor));
                 cellStyle.Triggers.Add(isSelectedTrigger);
               
                 _dataGrid.CellStyle = cellStyle;
@@ -135,6 +134,8 @@ namespace AppliedJobsManager.UI
         
         private void LoadSettings()
         {
+            _settings = _jsonSettingsManager.GetSettings();
+
             LoadColumnWidthsIfPossible();
             LoadRowHightlightColorIfPossible();
 
