@@ -86,8 +86,11 @@ namespace AppliedJobsManager.UI
                 var invalidRows = _invalidRowsRemover.ManageInvalidRows();
 
                 _invalidRowsNotifier.Notify(invalidRows, previousItems);
-                _jsonJobsManager.SaveJobs(_dataItems);
+                _jsonJobsManager.SaveJobs(_dataItems);                            
+            }
 
+            if (_settings.SaveColumnWidths)
+            {
                 _settings.ColumnsWidths = _dataGrid.Columns.Select(x => x.ActualWidth).ToList();
                 _jsonSettingsManager.SaveSettings(_settings);
             }
