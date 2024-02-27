@@ -13,9 +13,11 @@ namespace AppliedJobsManager.UI
     {
         private ObservableCollection<Row> _dataItems;
         private readonly JsonJobsManager _jsonJobsManager;
+        private readonly JsonSettingsManager _jsonSettingsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
         private readonly InvalidRowsNotifier _invalidRowsNotifier;
-        private readonly Settings.Settings _settings;
+
+        private Settings.Settings _settings;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -37,16 +39,10 @@ namespace AppliedJobsManager.UI
             _dataItems = _jsonJobsManager.LoadJobs();
             _invalidRowsRemover = new InvalidRowsRemover(_dataItems);
             _invalidRowsNotifier = new InvalidRowsNotifier();
+            _jsonSettingsManager = new JsonSettingsManager();
 
-            var jsonSettingsManager = new JsonSettingsManager();
-            _settings = jsonSettingsManager.LoadSettings();
-
-            LoadColumnWidthsIfPossible();
-
-            if (!string.IsNullOrEmpty(_settings.Font))
-            {
-                _dataGrid.FontFamily = new System.Windows.Media.FontFamily(_settings.Font);
-            }
+            _settings = _jsonSettingsManager.GetSettings();
+            LoadSettings();
 
             DataContext = this;
         }
@@ -91,7 +87,9 @@ namespace AppliedJobsManager.UI
 
         private void OnSettingsMenuItemClicked(object sender, RoutedEventArgs e)
         {
-            var settingsWindow = new SettingsWindow(_settings, new JsonSettingsManager(), _dataGrid);
+            _settings = _jsonSettingsManager.GetSettings();
+
+            var settingsWindow = new SettingsWindow(_settings, new JsonSettingsManager(), _dataGrid, LoadSettings);
             settingsWindow.Show();
         }
         
@@ -105,10 +103,19 @@ namespace AppliedJobsManager.UI
                 {
                     column.Width = _settings.ColumnsWidths[index];
                     index++;
-                }
-               
+                }               
             }
-        }        
+        }    
+        
+        private void LoadSettings()
+        {
+            LoadColumnWidthsIfPossible();
+
+            if (!string.IsNullOrEmpty(_settings.Font))
+            {
+                _dataGrid.FontFamily = new System.Windows.Media.FontFamily(_settings.Font);
+            }
+        }
     }
 
     public class Row

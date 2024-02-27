@@ -10,16 +10,19 @@ namespace AppliedJobsManager.UI
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        private readonly JsonSettingsManager _jsonSettingsManager;
-        private readonly Settings.Settings _settings;
+        private readonly JsonSettingsManager _jsonSettingsManager;       
         private readonly DataGrid _dataGrid;
-        public SettingsWindow(Settings.Settings settings, JsonSettingsManager jsonSettingsManager, DataGrid dataGrid)
+        private readonly Action _loadSettings;
+
+        private Settings.Settings _settings;
+        public SettingsWindow(Settings.Settings settings, JsonSettingsManager jsonSettingsManager, DataGrid dataGrid, Action loadSettings)
         {
             InitializeComponent();
 
             _settings = settings;
             _jsonSettingsManager = jsonSettingsManager;
             _dataGrid = dataGrid;
+            _loadSettings = loadSettings;
 
             SetUI();
         }
@@ -65,6 +68,8 @@ namespace AppliedJobsManager.UI
             };
 
             _jsonSettingsManager.SaveSettings(settingsToSave);
+            _settings = settingsToSave;
+            _loadSettings();
 
             Close();
         }

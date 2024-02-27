@@ -12,7 +12,7 @@ namespace AppliedJobsManager.JsonProcessing
             CreateDirectoryIfDoesntExist();
         }
 
-        public Settings.Settings LoadSettings()
+        public Settings.Settings GetSettings()
         {
             if (File.Exists(_jsonAppDataPath))
             {
