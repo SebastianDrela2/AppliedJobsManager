@@ -8,32 +8,32 @@ namespace AppliedJobsManager.Settings
     public class SettingsLoader
     {
         private DataGrid _dataGrid;
-        private JsonSettingsManager _jsonSettingsManager;
-        private Settings _settings;               
+        private JsonSettingsManager _jsonSettingsManager;                     
 
-        public SettingsLoader(DataGrid dataGrid, JsonSettingsManager jsonSettingsManager, Settings settings)
+        public SettingsLoader(DataGrid dataGrid, JsonSettingsManager jsonSettingsManager)
         {
             _dataGrid = dataGrid;
-            _jsonSettingsManager = jsonSettingsManager;
-            _settings = settings;
+            _jsonSettingsManager = jsonSettingsManager;           
         }
 
-        public void LoadSettings()
+        public Settings LoadSettings()
         {
-            _settings = _jsonSettingsManager.GetSettings();
+            var settings = _jsonSettingsManager.GetSettings();
 
-            LoadColumnWidthsIfPossible();
-            LoadRowHightlightColorIfPossible();
+            LoadColumnWidthsIfPossible(settings);
+            LoadRowHightlightColorIfPossible(settings);
 
-            if (!string.IsNullOrEmpty(_settings.Font))
+            if (!string.IsNullOrEmpty(settings.Font))
             {
-                _dataGrid.FontFamily = new System.Windows.Media.FontFamily(_settings.Font);
+                _dataGrid.FontFamily = new System.Windows.Media.FontFamily(settings.Font);
             }
+
+            return settings;
         }
 
-        private void LoadRowHightlightColorIfPossible()
+        private void LoadRowHightlightColorIfPossible(Settings settings)
         {
-            if (_settings.RowHightlightColor is not null)
+            if (settings.RowHightlightColor is not null)
             {
                 var cellStyle = new Style(typeof(DataGridCell));
 
@@ -43,22 +43,22 @@ namespace AppliedJobsManager.Settings
                     Value = true
                 };
 
-                isSelectedTrigger.Setters.Add(new Setter(DataGrid.BackgroundProperty, (SolidColorBrush)_settings.RowHightlightColor));
+                isSelectedTrigger.Setters.Add(new Setter(DataGrid.BackgroundProperty, (SolidColorBrush)settings.RowHightlightColor));
                 cellStyle.Triggers.Add(isSelectedTrigger);
 
                 _dataGrid.CellStyle = cellStyle;
             }
         }
 
-        private void LoadColumnWidthsIfPossible()
+        private void LoadColumnWidthsIfPossible(Settings settings)
         {
-            if (_settings.SaveColumnWidths)
+            if (settings.SaveColumnWidths)
             {
                 var index = 0;
 
                 foreach (var column in _dataGrid.Columns)
                 {
-                    column.Width = _settings.ColumnsWidths[index];
+                    column.Width = settings.ColumnsWidths[index];
                     index++;
                 }
             }

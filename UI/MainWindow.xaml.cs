@@ -45,9 +45,9 @@ namespace AppliedJobsManager.UI
             _invalidRowsRemover = new InvalidRowsRemover(_dataItems);
             _invalidRowsNotifier = new InvalidRowsNotifier();
             _jsonSettingsManager = new JsonSettingsManager();
-            _settingsLoader = new SettingsLoader(_dataGrid, _jsonSettingsManager, _settings);
+            _settingsLoader = new SettingsLoader(_dataGrid, _jsonSettingsManager);
 
-            _settingsLoader.LoadSettings();
+            _settings =  _settingsLoader.LoadSettings();
 
             DataContext = this;
         }
@@ -87,6 +87,9 @@ namespace AppliedJobsManager.UI
 
                 _invalidRowsNotifier.Notify(invalidRows, previousItems);
                 _jsonJobsManager.SaveJobs(_dataItems);
+
+                _settings.ColumnsWidths = _dataGrid.Columns.Select(x => x.ActualWidth).ToList();
+                _jsonSettingsManager.SaveSettings(_settings);
             }
         }
 
