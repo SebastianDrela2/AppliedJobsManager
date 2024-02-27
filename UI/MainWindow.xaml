@@ -16,16 +16,13 @@
         </Style>
     </Window.Resources>
     <StackPanel>
+
         <Grid Background="WhiteSmoke">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30"/>
-            </Grid.ColumnDefinitions>
-            
             <Menu>
-                <MenuItem Header="File" Grid.Column="0">
-                    <MenuItem Header="Settings" Click="OnSettingsMenuItemClicked"/>
-                </MenuItem>
+                <MenuItem Header="File" />
+                <MenuItem Header="Settings" Click="OnSettingsMenuItemClicked"/>
             </Menu>
+            
         </Grid>
         <Grid Margin="0 10 0 10">
             <Grid.ColumnDefinitions>

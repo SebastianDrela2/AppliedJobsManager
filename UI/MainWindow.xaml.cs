@@ -37,10 +37,16 @@ namespace AppliedJobsManager.UI
             _dataItems = _jsonJobsManager.LoadJobs();
             _invalidRowsRemover = new InvalidRowsRemover(_dataItems);
             _invalidRowsNotifier = new InvalidRowsNotifier();
-            var jsonSettingsManager = new JsonSettingsManager();
 
+            var jsonSettingsManager = new JsonSettingsManager();
             _settings = jsonSettingsManager.LoadSettings();
+
             LoadColumnWidthsIfPossible();
+
+            if (!string.IsNullOrEmpty(_settings.Font))
+            {
+                _dataGrid.FontFamily = new System.Windows.Media.FontFamily(_settings.Font);
+            }
 
             DataContext = this;
         }
@@ -102,7 +108,7 @@ namespace AppliedJobsManager.UI
                 }
                
             }
-        }
+        }        
     }
 
     public class Row

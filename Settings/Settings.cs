@@ -6,5 +6,6 @@
         public bool SaveColumnWidths { get; set; }
 
         public List<double> ColumnsWidths { get; set; }
+        public string Font { get; set; }
     }
 }
