@@ -5,6 +5,7 @@ using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Drawing;
+using AppliedJobsManager.Settings;
 
 namespace AppliedJobsManager.UI
 {
@@ -15,18 +16,18 @@ namespace AppliedJobsManager.UI
     {
         private readonly JsonSettingsManager _jsonSettingsManager;       
         private readonly DataGrid _dataGrid;
-        private readonly Action _loadSettings;
+        private readonly SettingsLoader _settingsLoader;
        
         private Settings.Settings _settings;
 
-        public SettingsWindow(Settings.Settings settings, JsonSettingsManager jsonSettingsManager, DataGrid dataGrid, Action loadSettings)
+        public SettingsWindow(Settings.Settings settings, JsonSettingsManager jsonSettingsManager, DataGrid dataGrid, SettingsLoader settingsLoader)
         {
             InitializeComponent();
 
             _settings = settings;
             _jsonSettingsManager = jsonSettingsManager;
             _dataGrid = dataGrid;
-            _loadSettings = loadSettings;
+            _settingsLoader = settingsLoader;
 
             SetUI();
         }
@@ -77,8 +78,8 @@ namespace AppliedJobsManager.UI
                 RowHightlightColor = _rowHighlightColorTextbox.Background
             };
 
-            _jsonSettingsManager.SaveSettings(newSettings);           
-            _loadSettings();                    
+            _jsonSettingsManager.SaveSettings(newSettings);
+            _settingsLoader.LoadSettings();                    
 
             Close();
         }

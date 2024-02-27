@@ -1,5 +1,6 @@
 ﻿using AppliedJobsManager.DataManagement;
 using AppliedJobsManager.JsonProcessing;
+using AppliedJobsManager.Settings;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -18,6 +19,7 @@ namespace AppliedJobsManager.UI
         private readonly JsonSettingsManager _jsonSettingsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
         private readonly InvalidRowsNotifier _invalidRowsNotifier;
+        private readonly SettingsLoader _settingsLoader;
 
         private Settings.Settings _settings;
 
@@ -42,8 +44,9 @@ namespace AppliedJobsManager.UI
             _invalidRowsRemover = new InvalidRowsRemover(_dataItems);
             _invalidRowsNotifier = new InvalidRowsNotifier();
             _jsonSettingsManager = new JsonSettingsManager();
-           
-            LoadSettings();
+            _settingsLoader = new SettingsLoader(_dataGrid, _jsonSettingsManager, _settings);
+
+            _settingsLoader.LoadSettings();
 
             DataContext = this;
         }
@@ -95,55 +98,9 @@ namespace AppliedJobsManager.UI
         {
             _settings = _jsonSettingsManager.GetSettings();
 
-            var settingsWindow = new SettingsWindow(_settings, new JsonSettingsManager(), _dataGrid, LoadSettings);
+            var settingsWindow = new SettingsWindow(_settings, new JsonSettingsManager(), _dataGrid, _settingsLoader);
             settingsWindow.Show();
-        }
-
-        private void LoadRowHightlightColorIfPossible()
-        {
-            if (_settings.RowHightlightColor is not null)
-            {
-                var cellStyle = new Style(typeof(DataGridCell));
-
-                var isSelectedTrigger = new Trigger
-                {
-                    Property = DataGridCell.IsSelectedProperty,
-                    Value = true
-                };
-
-                isSelectedTrigger.Setters.Add(new Setter(BackgroundProperty, (SolidColorBrush) _settings.RowHightlightColor));
-                cellStyle.Triggers.Add(isSelectedTrigger);
-              
-                _dataGrid.CellStyle = cellStyle;
-            }
-        }
-        
-        private void LoadColumnWidthsIfPossible()
-        {
-            if (_settings.SaveColumnWidths)
-            {
-                var index = 0;
-
-                foreach (var column in _dataGrid.Columns)
-                {
-                    column.Width = _settings.ColumnsWidths[index];
-                    index++;
-                }               
-            }
-        }    
-        
-        private void LoadSettings()
-        {
-            _settings = _jsonSettingsManager.GetSettings();
-
-            LoadColumnWidthsIfPossible();
-            LoadRowHightlightColorIfPossible();
-
-            if (!string.IsNullOrEmpty(_settings.Font))
-            {
-                _dataGrid.FontFamily = new System.Windows.Media.FontFamily(_settings.Font);
-            }           
-        }
+        }       
     }
 
     public class Row
