@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppliedJobsManager.UI"
         mc:Ignorable="d"
-        Title="Settings" Height="150" Width="300" WindowStartupLocation="CenterScreen">
+        Title="Settings" Height="170" Width="300" WindowStartupLocation="CenterScreen">
     <StackPanel>
       <Grid Margin="0 5 0 0">
         <Grid.ColumnDefinitions>
