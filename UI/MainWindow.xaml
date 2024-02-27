@@ -48,38 +48,27 @@
                       FontSize="15"                      
                       FontFamily="Arial"
                       FontWeight="Bold"
-                      ItemsSource="{Binding DataItems}">
+                      ItemsSource="{Binding DataItems}"
+                      SelectionUnit="FullRow"
+                      HeadersVisibility="All"
+                      >
+
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightBlue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
                 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Link" Width="2*" Binding="{Binding Link}">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Foreground" Value="Red"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Job" Width="*" Binding="{Binding Job}">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Foreground" Value="Blue"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Description" Width="3*" Binding="{Binding Description}">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Foreground" Value="Green"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Pay" Width="*" Binding="{Binding Pay}">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Foreground" Value="Red"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Date}" />
+                    <DataGridTextColumn Header="Link" Width="2*" Binding="{Binding Link}"/>
+                    <DataGridTextColumn Header="Job" Width="*" Binding="{Binding Job}"/>
+                    <DataGridTextColumn Header="Description" Width="3*" Binding="{Binding Description}"/>
+                    <DataGridTextColumn Header="Pay" Width="*" Binding="{Binding Pay}"/>
+                    <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Date}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
