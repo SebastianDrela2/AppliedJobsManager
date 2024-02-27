@@ -85,6 +85,11 @@ namespace AppliedJobsManager.UI
             }
         }
 
+        private void OnExitClicked(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private void OnSettingsMenuItemClicked(object sender, RoutedEventArgs e)
         {
             _settings = _jsonSettingsManager.GetSettings();

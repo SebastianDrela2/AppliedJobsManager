@@ -19,7 +19,9 @@
 
         <Grid Background="WhiteSmoke">
             <Menu>
-                <MenuItem Header="File" />
+                <MenuItem Header="File">
+                    <MenuItem Header="Exit" Click="OnExitClicked"/>
+                </MenuItem>
                 <MenuItem Header="Settings" Click="OnSettingsMenuItemClicked"/>
             </Menu>
             
