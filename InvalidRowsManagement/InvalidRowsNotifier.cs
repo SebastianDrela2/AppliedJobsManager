@@ -41,9 +41,14 @@ namespace AppliedJobsManager.DataManagement
                 return ("Date", NotifyReason.NullValue);
             }
 
-            if (!DateTime.TryParse(row.Date, out _))
+            if (!DateTime.TryParse(row.Date, out var date))
             {
                 return ("Date", NotifyReason.InvalidDate);
+            }
+
+            if (date < DateTime.Now)
+            {
+                return ("Date", NotifyReason.Outdated);
             }
 
             if (row.Pay is null)

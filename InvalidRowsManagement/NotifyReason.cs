@@ -5,6 +5,6 @@
         NullValue,
         InvalidDate,
         InvalidPay,
-
+        Outdated
     }
 }

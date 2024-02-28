@@ -30,7 +30,7 @@ namespace AppliedJobsManager.DataManagement
                 return true;
             }
 
-            if (dataItem.Date is null || !DateTime.TryParse(dataItem.Date, out _))
+            if (dataItem.Date is null || !DateTime.TryParse(dataItem.Date, out var date) || date < DateTime.Now)
             {
                 return true;
             }
