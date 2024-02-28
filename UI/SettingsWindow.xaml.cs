@@ -15,10 +15,11 @@ namespace AppliedJobsManager.UI
         private readonly JsonSettingsManager _jsonSettingsManager;       
         private readonly DataGrid _dataGrid;
         private readonly SettingsLoader _settingsLoader;
+        private readonly MainWindow _mainWindow;
        
         private Settings.Settings _settings;
 
-        public SettingsWindow(Settings.Settings settings, JsonSettingsManager jsonSettingsManager, DataGrid dataGrid, SettingsLoader settingsLoader)
+        public SettingsWindow(Settings.Settings settings, JsonSettingsManager jsonSettingsManager, DataGrid dataGrid, SettingsLoader settingsLoader, MainWindow mainWindow)
         {
             InitializeComponent();
 
@@ -26,6 +27,7 @@ namespace AppliedJobsManager.UI
             _jsonSettingsManager = jsonSettingsManager;
             _dataGrid = dataGrid;
             _settingsLoader = settingsLoader;
+            _mainWindow = mainWindow;
 
             SetUI();
         }
@@ -73,7 +75,7 @@ namespace AppliedJobsManager.UI
                 SaveColumnWidths = (bool)_saveColumnsWidthsCheckBox.IsChecked!,
                 ColumnsWidths = _dataGrid.Columns.Select(x => x.ActualWidth).ToList(),
                 Font = _fontsComboBox.SelectedItem.ToString()!,
-                RowHightlightColor = _rowHighlightColorTextbox.Background
+                RowHightlightColor = _rowHighlightColorTextbox.Background,             
             };
 
             _jsonSettingsManager.SaveSettings(newSettings);

@@ -43,7 +43,7 @@ namespace AppliedJobsManager.UI
             _invalidRowsRemover = new InvalidRowsRemover(_dataItems);
             _invalidRowsNotifier = new InvalidRowsNotifier();
             _jsonSettingsManager = new JsonSettingsManager();
-            _settingsLoader = new SettingsLoader(_dataGrid, _jsonSettingsManager);
+            _settingsLoader = new SettingsLoader(_dataGrid, _jsonSettingsManager, this);
 
             _settings =  _settingsLoader.LoadSettings();
 
@@ -89,9 +89,12 @@ namespace AppliedJobsManager.UI
 
             if (_settings.SaveColumnWidths)
             {
-                _settings.ColumnsWidths = _dataGrid.Columns.Select(x => x.ActualWidth).ToList();
-                _jsonSettingsManager.SaveSettings(_settings);
+                _settings.ColumnsWidths = _dataGrid.Columns.Select(x => x.ActualWidth).ToList();               
             }
+
+            _settings.Window = new Rectangle((int)Left, (int)Top, (int)Width, (int)Height);
+
+            _jsonSettingsManager.SaveSettings(_settings);
         }
 
         private void OnExitClicked(object sender, EventArgs e)
@@ -103,7 +106,7 @@ namespace AppliedJobsManager.UI
         {
             _settings = _jsonSettingsManager.GetSettings();
 
-            var settingsWindow = new SettingsWindow(_settings, new JsonSettingsManager(), _dataGrid, _settingsLoader);
+            var settingsWindow = new SettingsWindow(_settings, new JsonSettingsManager(), _dataGrid, _settingsLoader, this);
             settingsWindow.Show();
         }       
     }
