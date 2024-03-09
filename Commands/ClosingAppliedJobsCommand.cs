@@ -46,7 +46,7 @@ namespace AppliedJobsManager.Commands
 
             if (_settings.SaveColumnWidths)
             {
-                _settings.ColumnsWidths = view._dataGrid.Columns.Select(x => x.ActualWidth).ToList();
+                _settings.JobsColumns = view._dataGrid.Columns.Select(x => x.ActualWidth).ToList();
             }
 
             _settings.Window = new Rectangle((int)view.Left, (int)view.Top, (int)view.Width, (int)view.Height);

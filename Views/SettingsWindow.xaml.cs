@@ -11,6 +11,8 @@ namespace AppliedJobsManager.Views
     public partial class SettingsWindow : Window
     {        
         private readonly SettingsViewModel _viewModel;
+        public List<double> ColumnWidths;
+
         public SettingsWindow
             (JsonSettingsManager jsonSettingsManager, 
             SettingsLoader settingsLoader, Settings.Settings settings, AppliedJobsViewModel appliedJobsViewModel)
@@ -18,7 +20,7 @@ namespace AppliedJobsManager.Views
             InitializeComponent();
 
             _viewModel = new SettingsViewModel(jsonSettingsManager, settingsLoader, settings, appliedJobsViewModel);
-
+           
             DataContext = _viewModel;
         }
         

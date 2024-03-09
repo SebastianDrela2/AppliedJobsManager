@@ -5,6 +5,7 @@ using AppliedJobsManager.Models;
 using AppliedJobsManager.Settings;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace AppliedJobsManager.ViewModels
@@ -12,15 +13,15 @@ namespace AppliedJobsManager.ViewModels
     public class AppliedJobsViewModel : ViewModelBase
     {
         private ObservableCollection<Row> _rows;
-        private Style _rowHighlightColor;
-
+        private Style _rowHighlightColor;      
         private readonly JsonJobsManager _jsonJobsManager;
         private readonly JsonSettingsManager _jsonSettingsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
         private readonly InvalidRowsNotifier _invalidRowsNotifier;
         private readonly SettingsLoader _settingsLoader;
         private readonly Settings.Settings _settings;
-              
+        
+
         public IList<Row> Rows
         {
             get => _rows;           
@@ -43,9 +44,11 @@ namespace AppliedJobsManager.ViewModels
             }
         }
 
+        public ObservableCollection<DataGridColumn> JobsColumns;
+
         public System.Windows.Media.FontFamily Font => _settingsLoader.GetFontFamily();
 
-        public AppliedJobsViewModel() 
+        public AppliedJobsViewModel(ObservableCollection<DataGridColumn> jobsColumns) 
         {
             _jsonJobsManager = new JsonJobsManager();
             _rows = _jsonJobsManager.LoadJobs();
@@ -57,7 +60,21 @@ namespace AppliedJobsManager.ViewModels
             _settings = _jsonSettingsManager.GetSettings();           
             _rowHighlightColor = _settingsLoader.GetRowHightlightColor();
 
+            JobsColumns = jobsColumns;
+
+            LoadColumnWithsIfPossible(jobsColumns);
             ConfigureCommands();
+        }
+
+        private void LoadColumnWithsIfPossible(ObservableCollection<DataGridColumn> jobsColumns)
+        {
+            if (_settings.SaveColumnWidths)
+            {
+                for (var i = 0; i < _settings.JobsColumns.Count; i++)
+                {
+                    jobsColumns[i].Width = _settings.JobsColumns[i];
+                }
+            }
         }
 
         private void ConfigureCommands()

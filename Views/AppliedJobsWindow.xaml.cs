@@ -12,8 +12,10 @@ namespace AppliedJobsManager.Views
         public AppliedJobsView()
         {
             InitializeComponent();
-            
-            _viewModel = (AppliedJobsViewModel) DataContext;
+
+            _viewModel = new AppliedJobsViewModel(_dataGrid.Columns);
+
+            DataContext = _viewModel;
         }
 
         private void OnWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)

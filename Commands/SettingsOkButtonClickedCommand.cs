@@ -30,7 +30,8 @@ namespace AppliedJobsManager.Commands
             var newSettings = new Settings.Settings
             {
                 RemoveInvalidRows = (bool)view._invalidRowsCheckBox.IsChecked!,
-                SaveColumnWidths = (bool)view._saveColumnsWidthsCheckBox.IsChecked!,                
+                SaveColumnWidths = (bool)view._saveColumnsWidthsCheckBox.IsChecked!,
+                JobsColumns = _appliedJobsViewModel.JobsColumns.Select(x => x.ActualWidth).ToList(),
                 Font = view._fontsComboBox.SelectedItem.ToString()!,
                 RowHightlightColor = view._rowHighlightColorTextbox.Background,
             };

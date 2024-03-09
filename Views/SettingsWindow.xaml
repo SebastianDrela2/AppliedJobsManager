@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AppliedJobsManager.Views"
              mc:Ignorable="d" 
-             Title="Settings" Height="170" Width="300" WindowStartupLocation="CenterScreen">
+             Title="Settings" Height="180" Width="300" WindowStartupLocation="CenterScreen">
     <StackPanel>
         <Grid Margin="0 5 0 0">
             <Grid.ColumnDefinitions>

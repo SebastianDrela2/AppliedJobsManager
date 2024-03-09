@@ -29,7 +29,7 @@ namespace AppliedJobsManager.Commands
         {
             _settings = _jsonSettingsManager.GetSettings();
 
-            var settingsWindow = new SettingsWindow(_jsonSettingsManager, _settingsLoader, _settings , _appliedJobsViewModel);
+            var settingsWindow = new SettingsWindow(_jsonSettingsManager, _settingsLoader, _settings, _appliedJobsViewModel);
             settingsWindow.Show();
         }
     }

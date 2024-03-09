@@ -49,6 +49,6 @@ namespace AppliedJobsManager.Settings
             return new Style(typeof(DataGridCell));
         }
 
-        public List<double> GetColumnWidths() => _settings.ColumnsWidths;       
+        public List<double> GetColumnWidths() => _settings.JobsColumns;       
     }
 }

@@ -7,7 +7,7 @@
         public string Font;
         public System.Windows.Media.Brush RowHightlightColor;
 
-        public List<double> ColumnsWidths { get; set; }
+        public List<double> JobsColumns { get; set; }
         public Rectangle Window;
     }
 }

@@ -7,11 +7,8 @@
              mc:Ignorable="d" 
              d:DataContext="AppliedJobsManager.ViewModels.AppliedJobsViewModel"
              d:DesignHeight="450" d:DesignWidth="800"
-             Title="JobManager" Height="450" Width="800" Closing="OnWindowClosing" >
-    <Window.DataContext>
-        <vms:AppliedJobsViewModel />
-    </Window.DataContext>
-
+             Title="JobManager" Height="450" Width="800" Closing="OnWindowClosing">
+    
     <Window.Resources>
         <Style x:Key="CellTextStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="16" />
@@ -59,15 +56,15 @@
                       CellStyle="{Binding RowHighlightColor}"
                       SelectedItem="{Binding SelectedRow, Mode=TwoWay}"
                       SelectionUnit="FullRow"
-                      HeadersVisibility="All"
+                      HeadersVisibility="All"                     
                       >
                 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Link" Width="{Binding LinkColumnWidth}" Binding="{Binding Link}"/>
-                    <DataGridTextColumn Header="Job" Width="{Binding JobColumnWidth}" Binding="{Binding Job}"/>
-                    <DataGridTextColumn Header="Description" Width="{Binding DescriptionColumnWidth}" Binding="{Binding Description}"/>
-                    <DataGridTextColumn Header="Pay" Width="{Binding PayColumnWidth}" Binding="{Binding Pay}"/>
-                    <DataGridTextColumn Header="Date" Width="{Binding DateColumnWidth}" Binding="{Binding Date}"/>
+                    <DataGridTextColumn Header="Link" Width="{Binding LinkColumnWidth, Mode=TwoWay}" Binding="{Binding Link}"/>
+                    <DataGridTextColumn Header="Job" Width="{Binding JobColumnWidth, Mode=TwoWay}" Binding="{Binding Job}"/>
+                    <DataGridTextColumn Header="Description" Width="{Binding DescriptionColumnWidth, Mode=TwoWay}" Binding="{Binding Description}"/>
+                    <DataGridTextColumn Header="Pay" Width="{Binding PayColumnWidth, Mode=TwoWay}" Binding="{Binding Pay}"/>
+                    <DataGridTextColumn Header="Date" Width="{Binding DateColumnWidth, Mode=TwoWay}" Binding="{Binding Date}"/>
                 </DataGrid.Columns>
                 
             </DataGrid>
