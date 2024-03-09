@@ -7,6 +7,7 @@ namespace AppliedJobsManager.Commands
     public class AddRowAppliedJobsCommand : ICommand
     {
         private readonly AppliedJobsViewModel _appliedJobsViewmodel;
+
         public AddRowAppliedJobsCommand(AppliedJobsViewModel appliedJobsViewModel)
         {
             _appliedJobsViewmodel = appliedJobsViewModel;

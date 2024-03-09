@@ -9,6 +9,7 @@ namespace AppliedJobsManager.Views
     public partial class AppliedJobsView : Window
     {
         private readonly AppliedJobsViewModel _viewModel;
+
         public AppliedJobsView()
         {
             InitializeComponent();
