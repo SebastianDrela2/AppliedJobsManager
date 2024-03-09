@@ -1,10 +1,9 @@
 ﻿using AppliedJobsManager.Models;
-using AppliedJobsManager.UI;
 using System.Collections.ObjectModel;
 
 namespace AppliedJobsManager.DataManagement
 {
-    internal class InvalidRowsRemover
+    public class InvalidRowsRemover
     {
         private readonly ObservableCollection<Row> _dataItems;
         public InvalidRowsRemover(ObservableCollection<Row> dataItems)

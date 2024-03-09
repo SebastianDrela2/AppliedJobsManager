@@ -1,10 +1,9 @@
 ﻿using AppliedJobsManager.Models;
-using AppliedJobsManager.UI;
 using System.Text;
 
 namespace AppliedJobsManager.DataManagement
 {
-    internal class InvalidRowsNotifier
+    public class InvalidRowsNotifier
     {
         public void Notify(List<Row> rows, List<object> collection)
         {          

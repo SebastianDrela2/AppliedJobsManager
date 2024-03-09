@@ -1,12 +1,11 @@
 ﻿using AppliedJobsManager.Models;
-using AppliedJobsManager.UI;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.IO;
 
 namespace AppliedJobsManager.JsonProcessing;
 
-internal class JsonJobsManager : IJsonSettings
+public class JsonJobsManager : IJsonSettings
 {
     private readonly string _jsonAppDataPath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\JobsManager\jobs.json";
 

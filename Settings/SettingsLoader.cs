@@ -1,5 +1,4 @@
 ﻿using AppliedJobsManager.JsonProcessing;
-using AppliedJobsManager.UI;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -7,37 +6,31 @@ using System.Windows.Media;
 namespace AppliedJobsManager.Settings
 {
     public class SettingsLoader
-    {
-        private DataGrid _dataGrid;
-        private JsonSettingsManager _jsonSettingsManager;
-        private MainWindow _mainWindow;
+    {       
+        private readonly JsonSettingsManager _jsonSettingsManager;
+        private Settings _settings;       
 
-        public SettingsLoader(DataGrid dataGrid, JsonSettingsManager jsonSettingsManager, MainWindow mainWindow)
+        public SettingsLoader(JsonSettingsManager jsonSettingsManager)
         {
-            _dataGrid = dataGrid;
-            _jsonSettingsManager = jsonSettingsManager;   
-            _mainWindow = mainWindow;
+            _jsonSettingsManager = jsonSettingsManager;
+            _settings = jsonSettingsManager.GetSettings();               
         }
-
-        public Settings LoadSettings()
+      
+        public System.Windows.Media.FontFamily GetFontFamily()
         {
-            var settings = _jsonSettingsManager.GetSettings();
-
-            LoadWindowSize(settings);
-            LoadColumnWidthsIfPossible(settings);
-            LoadRowHightlightColorIfPossible(settings);
-
-            if (!string.IsNullOrEmpty(settings.Font))
+            if (!string.IsNullOrEmpty(_settings.Font))
             {
-                _dataGrid.FontFamily = new System.Windows.Media.FontFamily(settings.Font);
+                return new System.Windows.Media.FontFamily(_settings.Font);
             }
 
-            return settings;
+            return new System.Windows.Media.FontFamily("Arial");
         }
 
-        private void LoadRowHightlightColorIfPossible(Settings settings)
+        public Style GetRowHightlightColor()
         {
-            if (settings.RowHightlightColor is not null)
+            _settings = _jsonSettingsManager.GetSettings();
+
+            if (_settings.RowHightlightColor is not null)
             {
                 var cellStyle = new Style(typeof(DataGridCell));
 
@@ -47,36 +40,15 @@ namespace AppliedJobsManager.Settings
                     Value = true
                 };
 
-                isSelectedTrigger.Setters.Add(new Setter(DataGrid.BackgroundProperty, (SolidColorBrush)settings.RowHightlightColor));
+                isSelectedTrigger.Setters.Add(new Setter(DataGrid.BackgroundProperty, (SolidColorBrush)_settings.RowHightlightColor));
                 cellStyle.Triggers.Add(isSelectedTrigger);
 
-                _dataGrid.CellStyle = cellStyle;
+                return cellStyle;
             }
+
+            return new Style(typeof(DataGridCell));
         }
 
-        private void LoadColumnWidthsIfPossible(Settings settings)
-        {
-            if (settings.SaveColumnWidths)
-            {
-                var index = 0;
-
-                foreach (var column in _dataGrid.Columns)
-                {
-                    column.Width = settings.ColumnsWidths[index];
-                    index++;
-                }
-            }
-        }
-
-        private void LoadWindowSize(Settings settings)
-        {
-            if (settings.Window.Size.Width is not 0)
-            {
-                _mainWindow.Left = settings.Window.Left;
-                _mainWindow.Top = settings.Window.Top;
-                _mainWindow.Width = settings.Window.Width;
-                _mainWindow.Height = settings.Window.Height;
-            }
-        }
+        public List<double> GetColumnWidths() => _settings.ColumnsWidths;       
     }
 }
