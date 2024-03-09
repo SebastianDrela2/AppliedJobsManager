@@ -1,5 +1,6 @@
 ﻿using AppliedJobsManager.DataManagement;
 using AppliedJobsManager.JsonProcessing;
+using AppliedJobsManager.Models;
 using AppliedJobsManager.Settings;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -106,17 +107,8 @@ namespace AppliedJobsManager.UI
         {
             _settings = _jsonSettingsManager.GetSettings();
 
-            var settingsWindow = new SettingsWindow(_settings, new JsonSettingsManager(), _dataGrid, _settingsLoader, this);
+            var settingsWindow = new SettingsWindow(_settings, new JsonSettingsManager(), _dataGrid, _settingsLoader);
             settingsWindow.Show();
         }       
-    }
-
-    public class Row
-    {
-        public string Link { get; set; }
-        public string Job { get; set; }
-        public string Description { get; set; }
-        public string Pay { get; set; }
-        public string Date { get; set; }
-    }
+    }   
 }

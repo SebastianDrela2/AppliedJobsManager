@@ -14,20 +14,18 @@ namespace AppliedJobsManager.UI
     {
         private readonly JsonSettingsManager _jsonSettingsManager;       
         private readonly DataGrid _dataGrid;
-        private readonly SettingsLoader _settingsLoader;
-        private readonly MainWindow _mainWindow;
+        private readonly SettingsLoader _settingsLoader;       
        
         private Settings.Settings _settings;
 
-        public SettingsWindow(Settings.Settings settings, JsonSettingsManager jsonSettingsManager, DataGrid dataGrid, SettingsLoader settingsLoader, MainWindow mainWindow)
+        public SettingsWindow(Settings.Settings settings, JsonSettingsManager jsonSettingsManager, DataGrid dataGrid, SettingsLoader settingsLoader)
         {
             InitializeComponent();
 
             _settings = settings;
             _jsonSettingsManager = jsonSettingsManager;
             _dataGrid = dataGrid;
-            _settingsLoader = settingsLoader;
-            _mainWindow = mainWindow;
+            _settingsLoader = settingsLoader;           
 
             SetUI();
         }

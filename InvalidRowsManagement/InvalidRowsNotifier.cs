@@ -1,4 +1,5 @@
-﻿using AppliedJobsManager.UI;
+﻿using AppliedJobsManager.Models;
+using AppliedJobsManager.UI;
 using System.Text;
 
 namespace AppliedJobsManager.DataManagement
