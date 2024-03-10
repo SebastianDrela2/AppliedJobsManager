@@ -60,11 +60,11 @@
                       >
                 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Link" Width="{Binding LinkColumnWidth, Mode=TwoWay}" Binding="{Binding Link}"/>
-                    <DataGridTextColumn Header="Job" Width="{Binding JobColumnWidth, Mode=TwoWay}" Binding="{Binding Job}"/>
-                    <DataGridTextColumn Header="Description" Width="{Binding DescriptionColumnWidth, Mode=TwoWay}" Binding="{Binding Description}"/>
-                    <DataGridTextColumn Header="Pay" Width="{Binding PayColumnWidth, Mode=TwoWay}" Binding="{Binding Pay}"/>
-                    <DataGridTextColumn Header="Date" Width="{Binding DateColumnWidth, Mode=TwoWay}" Binding="{Binding Date}"/>
+                    <DataGridTextColumn Header="Link" Binding="{Binding Link}"/>
+                    <DataGridTextColumn Header="Job" Binding="{Binding Job}"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                    <DataGridTextColumn Header="Pay" Binding="{Binding Pay}"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
                 </DataGrid.Columns>
                 
             </DataGrid>
