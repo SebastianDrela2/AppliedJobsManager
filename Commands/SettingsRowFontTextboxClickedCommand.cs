@@ -4,20 +4,20 @@ using System.Windows.Media;
 
 namespace AppliedJobsManager.Commands
 {
-    public class SettingsTextboxClickedCommand : ICommand
+    public class SettingsRowFontTextboxClickedCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
 
-        public bool CanExecute(object? parameter) => true;        
+        public bool CanExecute(object? parameter) => true;
         public void Execute(object? parameter)
         {
-            var view = (SettingsWindow)parameter!;
+            var view = (SettingsWindow) parameter!;
 
             var colorDialog = new ColorDialog();
 
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
-                view._rowHighlightColorTextbox.Background = new SolidColorBrush(ConvertColorToMediaColor(colorDialog.Color));
+                view._rowFontColorTextbox.Background = new SolidColorBrush(ConvertColorToMediaColor(colorDialog.Color));
             }
         }
 

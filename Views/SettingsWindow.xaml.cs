@@ -33,9 +33,14 @@ namespace AppliedJobsManager.Views
             _viewModel.CancelClicked.Execute(this);
         }
 
-        private void OnTextBoxClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void OnRowHighlightTextBoxClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            _viewModel.OnTextBoxClicked.Execute(this);
-        }       
+            _viewModel.RowHighlightTextBoxClicked.Execute(this);
+        }
+
+        private void OnRowFontTextBoxClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            _viewModel.FontColorTextBoxClicked.Execute(this);
+        }
     }
 }

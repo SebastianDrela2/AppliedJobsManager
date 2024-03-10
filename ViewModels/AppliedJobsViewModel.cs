@@ -14,7 +14,8 @@ namespace AppliedJobsManager.ViewModels
     {
         private ObservableCollection<Row> _rows;
         private Style _rowHighlightColor;
-        private System.Windows.Media.FontFamily _font;
+        private System.Windows.Media.Brush _rowFontColor;
+        private System.Windows.Media.FontFamily _font;      
         
         private readonly JsonJobsManager _jsonJobsManager;
         private readonly JsonSettingsManager _jsonSettingsManager;
@@ -46,6 +47,16 @@ namespace AppliedJobsManager.ViewModels
             }
         }
 
+        public System.Windows.Media.Brush RowFontColor
+        {
+            get => _rowFontColor;
+            set
+            {
+                _rowFontColor = value;
+                OnPropertyChanged(nameof(RowFontColor));
+            }
+        }
+
         public System.Windows.Media.FontFamily Font
         {
             get => _font;
@@ -69,6 +80,7 @@ namespace AppliedJobsManager.ViewModels
             _settings = _jsonSettingsManager.GetSettings();           
             _rowHighlightColor = _settingsLoader.GetRowHightlightColor();
             _font = _settingsLoader.GetFontFamily();
+            _rowFontColor = _settingsLoader.GetRowFontColor();
 
             ConfigureCommands();
         }

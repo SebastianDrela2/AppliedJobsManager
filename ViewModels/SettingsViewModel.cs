@@ -7,11 +7,15 @@ using AppliedJobsManager.Commands;
 namespace AppliedJobsManager.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
-    {       
+    {
 
+        private readonly JsonSettingsManager _jsonSettingsManager;
+        private readonly SettingsLoader _settingsLoader;
+        private readonly AppliedJobsViewModel _appliedJobsViewModel;
         private readonly Settings.Settings _settings;
         
         private System.Windows.Media.Brush _rowHighlightColor;
+        private System.Windows.Media.Brush _rowFontColor;
         private bool _saveColumnWithsCheckboxEnabled;
         private string _selectedFont;
         private bool _invalidCheckBoxEnabled;
@@ -19,14 +23,22 @@ namespace AppliedJobsManager.ViewModels
         public SettingsViewModel
             (JsonSettingsManager jsonSettingsManager, SettingsLoader 
             settingsLoader, Settings.Settings settings, AppliedJobsViewModel appliedJobsViewModel)
-        {                       
+        {
+            _jsonSettingsManager = jsonSettingsManager;
+            _settingsLoader = settingsLoader;
             _settings = settings;
+            _appliedJobsViewModel = appliedJobsViewModel;
 
-            OkClicked = new SettingsOkButtonClickedCommand(jsonSettingsManager, settingsLoader, appliedJobsViewModel);
-            CancelClicked = new SettingsCancelClickedCommand();
-            OnTextBoxClicked = new SettingsTextboxClickedCommand();
-
+            ConfigureCommands();
             SetUI();
+        }
+
+        private void ConfigureCommands()
+        {
+            OkClicked = new SettingsOkButtonClickedCommand(_jsonSettingsManager, _settingsLoader, _appliedJobsViewModel);
+            CancelClicked = new SettingsCancelClickedCommand();
+            RowHighlightTextBoxClicked = new SettingsRowHighlightTextboxClickedCommand();
+            FontColorTextBoxClicked = new SettingsRowFontTextboxClickedCommand();
         }
 
         private void SetUI()
@@ -39,10 +51,17 @@ namespace AppliedJobsManager.ViewModels
                 _rowHighlightColor = _settings.RowHightlightColor;
             }
 
+            if (_settings.RowFontColor is not null)
+            {
+                _rowFontColor = _settings.RowFontColor;
+            }
+
             _selectedFont = GetSelectedFont();
-        }       
+        }
+        
         public List<string> Fonts => GetFonts();
         public System.Windows.Media.Brush RowHighlightColor => _rowHighlightColor;
+        public System.Windows.Media.Brush RowFontColor => _rowFontColor;
 
         public string SelectedFont
         {
@@ -62,9 +81,10 @@ namespace AppliedJobsManager.ViewModels
             set => _saveColumnWithsCheckboxEnabled = value;
         }
 
-        public ICommand OkClicked { get; }
-        public ICommand CancelClicked { get; }
-        public ICommand OnTextBoxClicked { get; }
+        public ICommand OkClicked { get; set; }
+        public ICommand CancelClicked { get; set; }
+        public ICommand RowHighlightTextBoxClicked { get; set; }
+        public ICommand FontColorTextBoxClicked { get; set; }
 
         private List<string> GetFonts()
         {

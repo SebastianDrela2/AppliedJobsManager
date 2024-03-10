@@ -33,6 +33,7 @@ namespace AppliedJobsManager.Commands
                 SaveColumnWidths = (bool)view._saveColumnsWidthsCheckBox.IsChecked!,               
                 Font = view._fontsComboBox.SelectedItem.ToString()!,
                 RowHightlightColor = view._rowHighlightColorTextbox.Background,
+                RowFontColor = view._rowFontColorTextbox.Background
             };
 
             if (newSettings.SaveColumnWidths)
@@ -44,6 +45,7 @@ namespace AppliedJobsManager.Commands
             _settingsLoader.UpdateSettings();
 
             _appliedJobsViewModel.RowHighlightColor = _settingsLoader.GetRowHightlightColor();
+            _appliedJobsViewModel.RowFontColor = _settingsLoader.GetRowFontColor();
             _appliedJobsViewModel.Font = _settingsLoader.GetFontFamily();
 
             view.Close();

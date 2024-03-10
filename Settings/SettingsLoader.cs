@@ -53,6 +53,17 @@ namespace AppliedJobsManager.Settings
             return new Style(typeof(DataGridCell));
         }
 
+        public System.Windows.Media.Brush GetRowFontColor()
+        {
+            if (_settings.RowFontColor is not null)
+            {
+                return _settings.RowFontColor;
+            }
+
+            // black brush default
+            return new SolidColorBrush(System.Windows.Media.Color.FromArgb(0,0,0,0));
+        }
+
         public List<double> GetColumnWidths() => _settings.JobsColumns;       
     }
 }

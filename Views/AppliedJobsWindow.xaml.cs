@@ -13,6 +13,7 @@ namespace AppliedJobsManager.Views
     {
         private readonly AppliedJobsViewModel _viewModel;
         private readonly Settings.Settings _settings;
+
         public AppliedJobsView()
         {
             InitializeComponent();
@@ -20,7 +21,7 @@ namespace AppliedJobsManager.Views
             _viewModel = new AppliedJobsViewModel();
             _settings = new JsonSettingsManager().GetSettings();
 
-            LoadColumnWithsIfPossible(_dataGrid.Columns);
+            LoadColumnWidthsIfPossible(_dataGrid.Columns);
 
             DataContext = _viewModel;
         }
@@ -30,7 +31,7 @@ namespace AppliedJobsManager.Views
             _viewModel.OnClosing.Execute(this);
         }
 
-        private void LoadColumnWithsIfPossible(ObservableCollection<DataGridColumn> jobsColumns)
+        private void LoadColumnWidthsIfPossible(ObservableCollection<DataGridColumn> jobsColumns)
         {
             if (_settings.SaveColumnWidths && _settings.JobsColumns is not null)
             {
