@@ -24,7 +24,7 @@ namespace AppliedJobsManager.Commands
                 Link = view._linkTextbox.Text,
                 Job = view._jobTextBox.Text,
                 Description = view._descriptionTextbox.Text,
-                Pay = view._payTextbox.Text,
+                Pay = view._payTextBox.Text,
                 Date = view._dateTextbox.Text
             };
 
