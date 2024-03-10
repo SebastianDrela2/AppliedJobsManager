@@ -24,7 +24,22 @@ namespace AppliedJobsManager.DataManagement
             System.Windows.MessageBox.Show(stringBuilder.ToString());
         }
 
-        private (string, NotifyReason) GetNotifyReason(Row row)
+        public bool TryNotifyRow(Row row)
+        {
+            var (column, reason) = GetNotifyReason(row);
+
+            if (column is null && reason is NotifyReason.NullValue)
+            {
+                return false;
+            }
+
+            MessageBox.Show($"Invalid data: {column} because of {reason}", 
+                "Invalid Data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            return true;
+        }
+
+        private (string?, NotifyReason) GetNotifyReason(Row row)
         {
             if (row.Job is null)
             {
@@ -60,8 +75,7 @@ namespace AppliedJobsManager.DataManagement
             {
                 return ("Pay", NotifyReason.InvalidPay);
             }
-
-            // should not be possible
+           
             return (null, NotifyReason.NullValue);
         }
     }

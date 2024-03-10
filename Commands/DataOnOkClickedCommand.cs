@@ -1,4 +1,5 @@
-﻿using AppliedJobsManager.Models;
+﻿using AppliedJobsManager.DataManagement;
+using AppliedJobsManager.Models;
 using AppliedJobsManager.ViewModels;
 using AppliedJobsManager.Views;
 using System.Windows.Input;
@@ -27,9 +28,13 @@ namespace AppliedJobsManager.Commands
                 Pay = view._payTextBox.Text,
                 Date = view._dateTextbox.Text
             };
+            var invalidRowsNotifier = new InvalidRowsNotifier();
 
-            _appliedJobsViewModel.Rows.Add(newRow);
-            view.Close();
+            if (!invalidRowsNotifier.TryNotifyRow(newRow))
+            {
+                _appliedJobsViewModel.Rows.Add(newRow);
+                view.Close();
+            }
         }
     }
 }
