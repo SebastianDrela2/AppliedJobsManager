@@ -24,7 +24,7 @@
 
         <TextBlock Text="Link: " Grid.Row="0" Grid.Column="1"/>
         <TextBlock Text="Job: " Grid.Row="1" Grid.Column="1"  Margin="0 5 0 0"/>
-        <TextBlock Text="Description: " Grid.Row="2" Grid.Column="1"/>
+        <TextBlock Text="Description: " Grid.Row="2" Grid.Column="1" Margin="0 5 0 0"/>
         <TextBlock Text="Pay: " Grid.Row="3" Grid.Column="1"  Margin="0 5 0 0"/>
         <TextBlock Text="Date: " Grid.Row="4" Grid.Column="1"  Margin="0 5 0 0"/>
 
