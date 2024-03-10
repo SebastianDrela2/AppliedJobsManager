@@ -14,8 +14,7 @@ namespace AppliedJobsManager.Commands
         private readonly JsonSettingsManager _jsonSettingsManager;
         private readonly JsonJobsManager _jsonJobsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
-        private readonly InvalidRowsNotifier _invalidRowsNotifier;
-        private readonly Settings.Settings _settings;
+        private readonly InvalidRowsNotifier _invalidRowsNotifier;       
         private readonly ObservableCollection<Row> _rows;
 
         public ClosingAppliedJobsCommand
@@ -25,17 +24,17 @@ namespace AppliedJobsManager.Commands
             _jsonSettingsManager = jsonSettingsManager;
             _invalidRowsRemover = invalidRowsRemover;
             _invalidRowsNotifier = invalidRowsNotifier;
-            _jsonJobsManager = jsonJobsManager;
-            _settings = jsonSettingsManager.GetSettings();
+            _jsonJobsManager = jsonJobsManager;           
             _rows = rows;
         }
         public bool CanExecute(object? parameter) => true;
         
         public void Execute(object? parameter)
-        {           
+        {
+            var settings = _jsonSettingsManager.GetSettings();
             var view = (AppliedJobsView) parameter!;           
 
-            if (_settings.RemoveInvalidRows)
+            if (settings.RemoveInvalidRows)
             {
                 var previousItems = _rows.Cast<object>().ToList();
                 var invalidRows = _invalidRowsRemover.ManageInvalidRows();
@@ -44,14 +43,14 @@ namespace AppliedJobsManager.Commands
                 _jsonJobsManager.SaveJobs(_rows);
             }
 
-            if (_settings.SaveColumnWidths)
+            if (settings.SaveColumnWidths)
             {
-                _settings.JobsColumns = view._dataGrid.Columns.Select(x => x.ActualWidth).ToList();
+                settings.JobsColumns = view._dataGrid.Columns.Select(x => x.ActualWidth).ToList();
             }
 
-            _settings.Window = new Rectangle((int)view.Left, (int)view.Top, (int)view.Width, (int)view.Height);
+            settings.Window = new Rectangle((int)view.Left, (int)view.Top, (int)view.Width, (int)view.Height);
 
-            _jsonSettingsManager.SaveSettings(_settings);
+            _jsonSettingsManager.SaveSettings(settings);
         }
     }
 }

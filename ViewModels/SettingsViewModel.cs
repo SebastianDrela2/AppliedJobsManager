@@ -40,7 +40,6 @@ namespace AppliedJobsManager.ViewModels
             }
 
             _selectedFont = GetSelectedFont();
-
         }       
         public List<string> Fonts => GetFonts();
         public System.Windows.Media.Brush RowHighlightColor => _rowHighlightColor;

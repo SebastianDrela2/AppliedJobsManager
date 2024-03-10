@@ -30,14 +30,21 @@ namespace AppliedJobsManager.Commands
             var newSettings = new Settings.Settings
             {
                 RemoveInvalidRows = (bool)view._invalidRowsCheckBox.IsChecked!,
-                SaveColumnWidths = (bool)view._saveColumnsWidthsCheckBox.IsChecked!,
-                JobsColumns = _appliedJobsViewModel.JobsColumns.Select(x => x.ActualWidth).ToList(),
+                SaveColumnWidths = (bool)view._saveColumnsWidthsCheckBox.IsChecked!,               
                 Font = view._fontsComboBox.SelectedItem.ToString()!,
                 RowHightlightColor = view._rowHighlightColorTextbox.Background,
             };
 
+            if (newSettings.SaveColumnWidths)
+            {
+                newSettings.JobsColumns = _jsonSettingsManager.GetSettings().JobsColumns;
+            }
+
             _jsonSettingsManager.SaveSettings(newSettings);
+            _settingsLoader.UpdateSettings();
+
             _appliedJobsViewModel.RowHighlightColor = _settingsLoader.GetRowHightlightColor();
+            _appliedJobsViewModel.Font = _settingsLoader.GetFontFamily();
 
             view.Close();
         }

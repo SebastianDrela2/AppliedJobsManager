@@ -15,6 +15,11 @@ namespace AppliedJobsManager.Settings
             _jsonSettingsManager = jsonSettingsManager;
             _settings = jsonSettingsManager.GetSettings();               
         }
+
+        public void UpdateSettings()
+        {
+            _settings = _jsonSettingsManager.GetSettings();
+        }
       
         public System.Windows.Media.FontFamily GetFontFamily()
         {
@@ -27,8 +32,7 @@ namespace AppliedJobsManager.Settings
         }
 
         public Style GetRowHightlightColor()
-        {
-            _settings = _jsonSettingsManager.GetSettings();
+        {           
 
             if (_settings.RowHightlightColor is not null)
             {

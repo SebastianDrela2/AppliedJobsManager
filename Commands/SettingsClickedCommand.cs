@@ -23,8 +23,9 @@ namespace AppliedJobsManager.Commands
             _settings = settings;
             _appliedJobsViewModel = appliedJobsViewModel;
         }
+
         public bool CanExecute(object? parameter) => true;
-       
+
         public void Execute(object? parameter)
         {
             _settings = _jsonSettingsManager.GetSettings();

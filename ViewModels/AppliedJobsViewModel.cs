@@ -13,7 +13,9 @@ namespace AppliedJobsManager.ViewModels
     public class AppliedJobsViewModel : ViewModelBase
     {
         private ObservableCollection<Row> _rows;
-        private Style _rowHighlightColor;      
+        private Style _rowHighlightColor;
+        private System.Windows.Media.FontFamily _font;
+        
         private readonly JsonJobsManager _jsonJobsManager;
         private readonly JsonSettingsManager _jsonSettingsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
@@ -44,11 +46,17 @@ namespace AppliedJobsManager.ViewModels
             }
         }
 
-        public ObservableCollection<DataGridColumn> JobsColumns;
-
-        public System.Windows.Media.FontFamily Font => _settingsLoader.GetFontFamily();
-
-        public AppliedJobsViewModel(ObservableCollection<DataGridColumn> jobsColumns) 
+        public System.Windows.Media.FontFamily Font
+        {
+            get => _font;
+            set
+            {
+                _font = value;
+                OnPropertyChanged(nameof(Font));
+            }
+        }
+           
+        public AppliedJobsViewModel() 
         {
             _jsonJobsManager = new JsonJobsManager();
             _rows = _jsonJobsManager.LoadJobs();
@@ -57,26 +65,14 @@ namespace AppliedJobsManager.ViewModels
             _invalidRowsNotifier = new InvalidRowsNotifier();
             _jsonSettingsManager = new JsonSettingsManager();
             _settingsLoader = new SettingsLoader(_jsonSettingsManager);
+
             _settings = _jsonSettingsManager.GetSettings();           
             _rowHighlightColor = _settingsLoader.GetRowHightlightColor();
+            _font = _settingsLoader.GetFontFamily();
 
-            JobsColumns = jobsColumns;
-
-            LoadColumnWithsIfPossible(jobsColumns);
             ConfigureCommands();
         }
-
-        private void LoadColumnWithsIfPossible(ObservableCollection<DataGridColumn> jobsColumns)
-        {
-            if (_settings.SaveColumnWidths)
-            {
-                for (var i = 0; i < _settings.JobsColumns.Count; i++)
-                {
-                    jobsColumns[i].Width = _settings.JobsColumns[i];
-                }
-            }
-        }
-
+        
         private void ConfigureCommands()
         {
             OnClosing = new ClosingAppliedJobsCommand(_jsonSettingsManager, _jsonJobsManager, _invalidRowsRemover, _invalidRowsNotifier, _rows);
@@ -89,6 +85,5 @@ namespace AppliedJobsManager.ViewModels
         public ICommand OnRemoveRow { get; set; }
         public ICommand OnClosing { get; set; }
         public ICommand OnSettingsClicked { get; set; }
-
     }
 }

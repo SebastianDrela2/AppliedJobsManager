@@ -10,8 +10,7 @@ namespace AppliedJobsManager.Views
     /// </summary>
     public partial class SettingsWindow : Window
     {        
-        private readonly SettingsViewModel _viewModel;
-        public List<double> ColumnWidths;
+        private readonly SettingsViewModel _viewModel;       
 
         public SettingsWindow
             (JsonSettingsManager jsonSettingsManager, 
