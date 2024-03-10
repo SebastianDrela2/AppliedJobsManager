@@ -20,11 +20,18 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <CheckBox x:Name="_invalidRowsCheckBox" IsChecked="{Binding InvalidRowsCheckBoxEnabled}" 
-                      Grid.Column="1" Grid.Row="0" Content="Remove invalid rows."/>
+            <CheckBox x:Name="_invalidRowsCheckBox" 
+                      IsChecked="{Binding InvalidRowsCheckBoxEnabled}" 
+                      Grid.Column="1" 
+                      Grid.Row="0" 
+                      Content="Remove invalid rows."/>
             
-            <CheckBox x:Name="_saveColumnsWidthsCheckBox" IsChecked="{Binding SaveColumnWidthsCheckBoxEnabled}"
-                      Margin="0 5 0 0" Grid.Column="1" Grid.Row="1" Content="Save column widths."/>
+            <CheckBox x:Name="_saveColumnsWidthsCheckBox" 
+                      IsChecked="{Binding SaveColumnWidthsCheckBoxEnabled}"
+                      Margin="0 5 0 0" 
+                      Grid.Column="1" 
+                      Grid.Row="1" 
+                      Content="Save column widths."/>
 
         </Grid>
 
@@ -49,10 +56,13 @@
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Row highlight color: " Grid.Column="1"/>
-            <TextBox x:Name="_rowHighlightColorTextbox" Background="{Binding RowHighlightColor}"  
-                     Grid.Column="3" PreviewMouseLeftButtonDown="OnTextBoxClicked"/>
+            <TextBlock Text="Row highlight color: " 
+                       Grid.Column="1"/>
 
+            <TextBox x:Name="_rowHighlightColorTextbox" 
+                     Background="{Binding RowHighlightColor}"                      
+                     Grid.Column="3" 
+                     PreviewMouseLeftButtonDown="OnTextBoxClicked"/>
         </Grid>
 
         <Grid Margin="0 10 0 5">
