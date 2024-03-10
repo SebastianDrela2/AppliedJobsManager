@@ -13,7 +13,7 @@ namespace AppliedJobsManager.ViewModels
     public class AppliedJobsViewModel : ViewModelBase
     {
         private ObservableCollection<Row> _rows;
-        private Style _rowHighlightColor;
+        private Style _cellStyle;
         private System.Windows.Media.Brush _rowFontColor;
         private System.Windows.Media.FontFamily _font;      
         
@@ -37,26 +37,16 @@ namespace AppliedJobsManager.ViewModels
 
         public Row SelectedRow { get; set; }
         
-        public Style RowHighlightColor
+        public Style CellStyle
         {
-            get => _rowHighlightColor;
+            get => _cellStyle;
             set
             {
-                _rowHighlightColor = value;
-                OnPropertyChanged(nameof(RowHighlightColor));
+                _cellStyle = value;
+                OnPropertyChanged(nameof(CellStyle));
             }
         }
-
-        public System.Windows.Media.Brush RowFontColor
-        {
-            get => _rowFontColor;
-            set
-            {
-                _rowFontColor = value;
-                OnPropertyChanged(nameof(RowFontColor));
-            }
-        }
-
+        
         public System.Windows.Media.FontFamily Font
         {
             get => _font;
@@ -77,8 +67,8 @@ namespace AppliedJobsManager.ViewModels
             _jsonSettingsManager = new JsonSettingsManager();
             _settingsLoader = new SettingsLoader(_jsonSettingsManager);
 
-            _settings = _jsonSettingsManager.GetSettings();           
-            _rowHighlightColor = _settingsLoader.GetRowHightlightColor();
+            _settings = _jsonSettingsManager.GetSettings();
+            _cellStyle = _settingsLoader.GetCellStyle();
             _font = _settingsLoader.GetFontFamily();
             _rowFontColor = _settingsLoader.GetRowFontColor();
 

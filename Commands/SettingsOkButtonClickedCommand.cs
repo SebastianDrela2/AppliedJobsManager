@@ -44,8 +44,7 @@ namespace AppliedJobsManager.Commands
             _jsonSettingsManager.SaveSettings(newSettings);
             _settingsLoader.UpdateSettings();
 
-            _appliedJobsViewModel.RowHighlightColor = _settingsLoader.GetRowHightlightColor();
-            _appliedJobsViewModel.RowFontColor = _settingsLoader.GetRowFontColor();
+            _appliedJobsViewModel.CellStyle = _settingsLoader.GetCellStyle();          
             _appliedJobsViewModel.Font = _settingsLoader.GetFontFamily();
 
             view.Close();

@@ -31,13 +31,18 @@ namespace AppliedJobsManager.Settings
             return new System.Windows.Media.FontFamily("Arial");
         }
 
-        public Style GetRowHightlightColor()
-        {           
+        public Style GetCellStyle()
+        {
+            var cellStyle = new Style(typeof(DataGridCell));
+
+
+            if (_settings.RowFontColor is not null)
+            {
+                cellStyle.Setters.Add(new Setter(DataGridCell.ForegroundProperty, _settings.RowFontColor));
+            }
 
             if (_settings.RowHightlightColor is not null)
-            {
-                var cellStyle = new Style(typeof(DataGridCell));
-
+            {                
                 var isSelectedTrigger = new Trigger
                 {
                     Property = DataGridCell.IsSelectedProperty,
@@ -45,12 +50,10 @@ namespace AppliedJobsManager.Settings
                 };
 
                 isSelectedTrigger.Setters.Add(new Setter(DataGrid.BackgroundProperty, (SolidColorBrush)_settings.RowHightlightColor));
-                cellStyle.Triggers.Add(isSelectedTrigger);
-
-                return cellStyle;
+                cellStyle.Triggers.Add(isSelectedTrigger);             
             }
 
-            return new Style(typeof(DataGridCell));
+            return cellStyle;
         }
 
         public System.Windows.Media.Brush GetRowFontColor()

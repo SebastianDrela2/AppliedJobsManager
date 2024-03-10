@@ -54,7 +54,7 @@
                       FontWeight="Bold"
                       ItemsSource="{Binding Rows}"
                       Foreground="{Binding RowFontColor}"
-                      CellStyle="{Binding RowHighlightColor}"
+                      CellStyle="{Binding CellStyle}"
                       SelectedItem="{Binding SelectedRow, Mode=TwoWay}"
                       SelectionUnit="FullRow"
                       HeadersVisibility="All"                     
