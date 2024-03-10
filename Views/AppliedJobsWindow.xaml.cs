@@ -22,6 +22,7 @@ namespace AppliedJobsManager.Views
             _settings = new JsonSettingsManager().GetSettings();
 
             LoadColumnWidthsIfPossible(_dataGrid.Columns);
+            LoadWindowSizeIfPossible();
 
             DataContext = _viewModel;
         }
@@ -39,6 +40,17 @@ namespace AppliedJobsManager.Views
                 {
                     jobsColumns[i].Width = _settings.JobsColumns[i];
                 }
+            }
+        }
+
+        private void LoadWindowSizeIfPossible()
+        {
+            if (!_settings.Window.IsEmpty)
+            {
+                Left = _settings.Window.Left;
+                Top = _settings.Window.Top;
+                Width = _settings.Window.Width;
+                Height = _settings.Window.Height;
             }
         }
     }

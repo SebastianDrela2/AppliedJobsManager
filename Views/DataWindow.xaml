@@ -1,0 +1,58 @@
+﻿<Window x:Class="AppliedJobsManager.Views.DataWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppliedJobsManager.Views"
+        xmlns:vms="clr-namespace:AppliedJobsManager.ViewModels"
+        mc:Ignorable="d"
+        Title="Data" Height="200" Width="310" WindowStartupLocation="CenterScreen">
+    <StackPanel>
+      <Grid Margin="0 10 10 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Link: " Grid.Row="0" Grid.Column="1"/>
+        <TextBlock Text="Job: " Grid.Row="1" Grid.Column="1"  Margin="0 5 0 0"/>
+        <TextBlock Text="Description: " Grid.Row="2" Grid.Column="1"/>
+        <TextBlock Text="Pay: " Grid.Row="3" Grid.Column="1"  Margin="0 5 0 0"/>
+        <TextBlock Text="Date: " Grid.Row="4" Grid.Column="1"  Margin="0 5 0 0"/>
+
+        <TextBox x:Name="_linkTextbox" Grid.Row="0" Grid.Column="3"/>
+        <TextBox x:Name="_jobTextBox" Grid.Row="1" Grid.Column="3" Margin="0 5 0 0"/>
+        <TextBox x:Name="_descriptionTextbox" Grid.Row="2" Grid.Column="3"/>
+        <TextBox x:Name="_payTextBox" Grid.Row="3" Grid.Column="3" Margin="0 5 0 0"/>
+        <TextBox x:Name="_dateTextbox" Grid.Row="4" Grid.Column="3" Margin="0 5 0 0"/>
+
+      </Grid>
+
+      <Grid Margin="30 10 0 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="_okButton" MinWidth="100" Content="OK" Grid.Column="1" Grid.Row="0" Click="OnOkButtonClicked"/>
+            <Button x:Name="_cancelButton" MinWidth="100" Content="Cancel" Grid.Column="3" Grid.Row="0" Click="OnCancelButtonClicked"/>
+      </Grid>
+    </StackPanel>
+</Window>

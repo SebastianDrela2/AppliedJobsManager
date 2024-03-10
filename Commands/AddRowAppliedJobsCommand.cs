@@ -1,6 +1,6 @@
 ﻿using AppliedJobsManager.ViewModels;
 using System.Windows.Input;
-using AppliedJobsManager.Models;
+using AppliedJobsManager.Views;
 
 namespace AppliedJobsManager.Commands
 {
@@ -18,7 +18,7 @@ namespace AppliedJobsManager.Commands
         public bool CanExecute(object? parameter) => true;        
         public void Execute(object? parameter)
         {
-            _appliedJobsViewmodel.Rows.Add(new Row());
+            _ = new DataWindow(_appliedJobsViewmodel);           
         }
     }
 }

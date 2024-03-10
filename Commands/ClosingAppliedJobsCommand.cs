@@ -39,8 +39,7 @@ namespace AppliedJobsManager.Commands
                 var previousItems = _rows.Cast<object>().ToList();
                 var invalidRows = _invalidRowsRemover.ManageInvalidRows();
 
-                _invalidRowsNotifier.Notify(invalidRows, previousItems);
-                _jsonJobsManager.SaveJobs(_rows);
+                _invalidRowsNotifier.Notify(invalidRows, previousItems);               
             }
 
             if (settings.SaveColumnWidths)
@@ -51,6 +50,7 @@ namespace AppliedJobsManager.Commands
             settings.Window = new Rectangle((int)view.Left, (int)view.Top, (int)view.Width, (int)view.Height);
 
             _jsonSettingsManager.SaveSettings(settings);
+            _jsonJobsManager.SaveJobs(_rows);
         }
     }
 }
