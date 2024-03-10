@@ -32,33 +32,7 @@ namespace AppliedJobsManager.ViewModels
             ConfigureCommands();
             SetUI();
         }
-
-        private void ConfigureCommands()
-        {
-            OkClicked = new SettingsOkButtonClickedCommand(_jsonSettingsManager, _settingsLoader, _appliedJobsViewModel);
-            CancelClicked = new SettingsCancelClickedCommand();
-            RowHighlightTextBoxClicked = new SettingsRowHighlightTextboxClickedCommand();
-            FontColorTextBoxClicked = new SettingsRowFontTextboxClickedCommand();
-        }
-
-        private void SetUI()
-        {
-           _invalidCheckBoxEnabled = _settings.RemoveInvalidRows;
-           _saveColumnWithsCheckboxEnabled = _settings.SaveColumnWidths;
-
-            if (_settings.RowHightlightColor is not null)
-            {
-                _rowHighlightColor = _settings.RowHightlightColor;
-            }
-
-            if (_settings.RowFontColor is not null)
-            {
-                _rowFontColor = _settings.RowFontColor;
-            }
-
-            _selectedFont = GetSelectedFont();
-        }
-        
+      
         public List<string> Fonts => GetFonts();
         public System.Windows.Media.Brush RowHighlightColor => _rowHighlightColor;
         public System.Windows.Media.Brush RowFontColor => _rowFontColor;
@@ -81,10 +55,36 @@ namespace AppliedJobsManager.ViewModels
             set => _saveColumnWithsCheckboxEnabled = value;
         }
 
-        public ICommand OkClicked { get; set; }
-        public ICommand CancelClicked { get; set; }
-        public ICommand RowHighlightTextBoxClicked { get; set; }
-        public ICommand FontColorTextBoxClicked { get; set; }
+        public ICommand OkClicked { get; private set; }
+        public ICommand CancelClicked { get; private set; }
+        public ICommand RowHighlightTextBoxClicked { get; private set; }
+        public ICommand FontColorTextBoxClicked { get; private set; }
+
+        private void ConfigureCommands()
+        {
+            OkClicked = new SettingsOkButtonClickedCommand(_jsonSettingsManager, _settingsLoader, _appliedJobsViewModel);
+            CancelClicked = new SettingsCancelClickedCommand();
+            RowHighlightTextBoxClicked = new SettingsRowHighlightTextboxClickedCommand();
+            FontColorTextBoxClicked = new SettingsRowFontTextboxClickedCommand();
+        }
+
+        private void SetUI()
+        {
+            _invalidCheckBoxEnabled = _settings.RemoveInvalidRows;
+            _saveColumnWithsCheckboxEnabled = _settings.SaveColumnWidths;
+
+            if (_settings.RowHightlightColor is not null)
+            {
+                _rowHighlightColor = _settings.RowHightlightColor;
+            }
+
+            if (_settings.RowFontColor is not null)
+            {
+                _rowFontColor = _settings.RowFontColor;
+            }
+
+            _selectedFont = GetSelectedFont();
+        }
 
         private List<string> GetFonts()
         {

@@ -26,6 +26,7 @@
                     <MenuItem Header="Exit"/>
                 </MenuItem>
                 <MenuItem Header="Settings" Command="{Binding OnSettingsClicked}"/>
+                <MenuItem Header="Help" Command="{Binding OnHelpClicked}"/>
             </Menu>
 
         </Grid>

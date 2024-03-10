@@ -81,11 +81,13 @@ namespace AppliedJobsManager.ViewModels
             OnSettingsClicked = new SettingsClickedCommand(_jsonSettingsManager, _settingsLoader, _settings, this);
             OnAddRow = new AddRowAppliedJobsCommand(this);
             OnRemoveRow = new RemoveRowAppliedJobsCommand(this);
+            OnHelpClicked = new HelpClickedAppliedJobsCommand();
         }
 
-        public ICommand OnAddRow { get; set; }
-        public ICommand OnRemoveRow { get; set; }
-        public ICommand OnClosing { get; set; }
-        public ICommand OnSettingsClicked { get; set; }
+        public ICommand OnClosing { get; private set; }
+        public ICommand OnSettingsClicked { get; private set; }
+        public ICommand OnAddRow { get; private set; }
+        public ICommand OnRemoveRow { get; private set; }    
+        public ICommand OnHelpClicked { get; private set; }
     }
 }

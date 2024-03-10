@@ -11,7 +11,7 @@ namespace AppliedJobsManager.ViewModels
             OnCancelClicked = new DataOnCancelClickedCommand();
         }
 
-        public ICommand OnOkClicked;
-        public ICommand OnCancelClicked;
+        public ICommand OnOkClicked { get; init; }
+        public ICommand OnCancelClicked { get; init; }
     }
 }
