@@ -23,7 +23,7 @@ namespace AppliedJobsManager.Views
             DataContext = _viewModel;
         }
         
-        private void OnOkButtonClicked(object sender, RoutedEventArgs e)
+        public void OnOkButtonClicked(object sender, RoutedEventArgs e)
         {
             _viewModel.OkClicked.Execute(this);
         }
@@ -41,6 +41,14 @@ namespace AppliedJobsManager.Views
         private void OnRowFontTextBoxClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             _viewModel.FontColorTextBoxClicked.Execute(this);
+        }
+
+        private void OnKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key is System.Windows.Input.Key.Enter or System.Windows.Input.Key.Space)
+            {
+                _viewModel.OkClicked.Execute(this);
+            }
         }
     }
 }

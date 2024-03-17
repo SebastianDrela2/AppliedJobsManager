@@ -72,14 +72,14 @@ namespace AppliedJobsManager.ViewModels
         public ICommand OkClicked { get; private set; }
         public ICommand CancelClicked { get; private set; }
         public ICommand RowHighlightTextBoxClicked { get; private set; }
-        public ICommand FontColorTextBoxClicked { get; private set; }
+        public ICommand FontColorTextBoxClicked { get; private set; }       
 
         private void ConfigureCommands()
         {
             OkClicked = new SettingsOkButtonClickedCommand(_jsonSettingsManager, _settingsLoader, _appliedJobsViewModel);
             CancelClicked = new SettingsCancelClickedCommand();
             RowHighlightTextBoxClicked = new SettingsRowHighlightTextboxClickedCommand();
-            FontColorTextBoxClicked = new SettingsRowFontTextboxClickedCommand();
+            FontColorTextBoxClicked = new SettingsRowFontTextboxClickedCommand();           
         }
 
         private void SetUI()
