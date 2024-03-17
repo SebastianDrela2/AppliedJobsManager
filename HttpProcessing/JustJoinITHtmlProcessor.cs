@@ -7,16 +7,12 @@ namespace AppliedJobsManager.HttpProcessing
     public class JustJoinITHtmlProcessor
     {        
         private readonly string? _httpRequest;
-        private readonly HtmlNodeCollection _divs;
+        private readonly HtmlNodeCollection? _divs;
       
         public JustJoinITHtmlProcessor(string httpLink)
         {           
             _httpRequest = GetRequest(httpLink);
-
-            if (_httpRequest is not null)
-            {
-                _divs = GetAllDivs();
-            }
+            _divs = GetAllDivs();
         }
 
         public string GetInnerDivHtml(string outerDivName)
@@ -33,12 +29,17 @@ namespace AppliedJobsManager.HttpProcessing
             return desiredDiv.InnerHtml;
         }
 
-        private HtmlNodeCollection GetAllDivs()
+        private HtmlNodeCollection? GetAllDivs()
         {
-            var htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(_httpRequest);
+            if (_httpRequest is not null)
+            {
+                var htmlDocument = new HtmlDocument();
+                htmlDocument.LoadHtml(_httpRequest);
 
-            return htmlDocument.DocumentNode.SelectNodes("//div");
+                return htmlDocument.DocumentNode.SelectNodes("//div");
+            }
+
+            return null;
         }
             
         private string? GetRequest(string requestUri)
