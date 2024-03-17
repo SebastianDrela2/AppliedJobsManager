@@ -1,12 +1,14 @@
 ﻿using AppliedJobsManager.HttpProcessing;
 using Newtonsoft.Json;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AppliedJobsManager.Models
 {
     public class Row
     {
         private JustJoinITHtmlProcessor _htmlProcessor;
-        
+
+        [NotNull]
         private string _link;
         public string Link
         {
@@ -22,10 +24,10 @@ namespace AppliedJobsManager.Models
             set => _link = value;
         }
 
-        public string Job { get; set; }
-        public string Description { get; set; }
-        public string Pay { get; set; }
-        public string Date { get; set; }
+        public required string Job { get; set; }
+        public required string Description { get; set; }
+        public required string Pay { get; set; }
+        public required string Date { get; set; }
 
         [JsonIgnore]
         public string TypeOfWork => _htmlProcessor.GetInnerDivHtml("Type of work");
