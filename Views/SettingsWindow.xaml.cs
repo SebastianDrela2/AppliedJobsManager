@@ -2,6 +2,7 @@
 using AppliedJobsManager.Settings;
 using AppliedJobsManager.ViewModels;
 using System.Windows;
+using System.Windows.Input;
 
 namespace AppliedJobsManager.Views
 {
@@ -33,19 +34,19 @@ namespace AppliedJobsManager.Views
             _viewModel.CancelClicked.Execute(this);
         }
 
-        private void OnRowHighlightTextBoxClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void OnRowHighlightTextBoxClicked(object sender, MouseButtonEventArgs e)
         {
             _viewModel.RowHighlightTextBoxClicked.Execute(this);
         }
 
-        private void OnRowFontTextBoxClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void OnRowFontTextBoxClicked(object sender, MouseButtonEventArgs e)
         {
             _viewModel.FontColorTextBoxClicked.Execute(this);
         }
 
         private void OnKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key is System.Windows.Input.Key.Enter or System.Windows.Input.Key.Space)
+            if (e.Key is Key.Enter or Key.Space)
             {
                 _viewModel.OkClicked.Execute(this);
             }
