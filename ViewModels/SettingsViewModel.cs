@@ -8,6 +8,7 @@ namespace AppliedJobsManager.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
+        private List<int> _suggestedFontSizes = new List<int> { 2, 5, 8, 10, 15, 20 };
 
         private readonly JsonSettingsManager _jsonSettingsManager;
         private readonly SettingsLoader _settingsLoader;
@@ -18,7 +19,8 @@ namespace AppliedJobsManager.ViewModels
         private System.Windows.Media.Brush _rowFontColor;
         private bool _saveColumnWithsCheckboxEnabled;
         private string _selectedFont;
-        private bool _invalidCheckBoxEnabled;
+        private int _selectedFontSize;
+        private bool _invalidCheckBoxEnabled;       
 
         public SettingsViewModel
             (JsonSettingsManager jsonSettingsManager, SettingsLoader 
@@ -33,16 +35,28 @@ namespace AppliedJobsManager.ViewModels
             SetUI();
         }
       
-        public List<string> Fonts => GetFonts();
+        public List<string> Fonts => GetFonts();       
         public System.Windows.Media.Brush RowHighlightColor => _rowHighlightColor;
         public System.Windows.Media.Brush RowFontColor => _rowFontColor;
-
+      
         public string SelectedFont
         {
             get => _selectedFont;
             set => _selectedFont = value;
         }
-              
+
+        public int SelectedFontSize
+        {
+            get => _selectedFontSize;
+            set => _selectedFontSize = value;
+        }
+
+        public List<int> SuggestedFontSizes
+        {
+            get => _suggestedFontSizes;
+            set => _suggestedFontSizes = value;
+        }
+
         public bool InvalidRowsCheckBoxEnabled
         {
             get => _invalidCheckBoxEnabled;
@@ -83,7 +97,19 @@ namespace AppliedJobsManager.ViewModels
                 _rowFontColor = _settings.RowFontColor;
             }
 
+            SetSuggestedFontSizes();
+
             _selectedFont = GetSelectedFont();
+            _selectedFontSize = GetSelectedFontSize();
+        }
+
+        private void SetSuggestedFontSizes()
+        {           
+            if (_settings.FontSize is not 0 && !_suggestedFontSizes.Contains(_settings.FontSize))
+            {
+                _suggestedFontSizes.Add(_settings.FontSize);
+                _suggestedFontSizes = _suggestedFontSizes.OrderBy(x => x).ToList();
+            }          
         }
 
         private List<string> GetFonts()
@@ -107,6 +133,16 @@ namespace AppliedJobsManager.ViewModels
             }
 
             return "Arial";
+        }
+
+        private int GetSelectedFontSize()
+        {
+            if (_settings.FontSize is not 0)
+            {
+                return _settings.FontSize;
+            }
+
+            return 10;
         }
     }
 }

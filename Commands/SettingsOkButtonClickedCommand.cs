@@ -31,7 +31,8 @@ namespace AppliedJobsManager.Commands
             {
                 RemoveInvalidRows = (bool)view._invalidRowsCheckBox.IsChecked!,
                 SaveColumnWidths = (bool)view._saveColumnsWidthsCheckBox.IsChecked!,               
-                Font = view._fontsComboBox.SelectedItem.ToString()!,
+                Font = view._fontsComboBox.Text,
+                FontSize = int.Parse(view._fontSizesComboBox.Text),
                 RowHightlightColor = view._rowHighlightColorTextbox.Background,
                 RowFontColor = view._rowFontColorTextbox.Background
             };
@@ -44,10 +45,16 @@ namespace AppliedJobsManager.Commands
             _jsonSettingsManager.SaveSettings(newSettings);
             _settingsLoader.UpdateSettings();
 
-            _appliedJobsViewModel.CellStyle = _settingsLoader.GetCellStyle();          
-            _appliedJobsViewModel.Font = _settingsLoader.GetFontFamily();
+            SetAppliedJobsViewModel();
 
             view.Close();
+        }
+
+        private void SetAppliedJobsViewModel()
+        {
+            _appliedJobsViewModel.CellStyle = _settingsLoader.GetCellStyle();
+            _appliedJobsViewModel.Font = _settingsLoader.GetFontFamily();
+            _appliedJobsViewModel.FontSize = _settingsLoader.GetFontSize();
         }
     }
 }

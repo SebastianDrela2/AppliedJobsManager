@@ -49,11 +49,10 @@
         <Grid>
             <DataGrid x:Name="_dataGrid" 
                       AutoGenerateColumns="False"
-                      FontSize="15"                      
+                      FontSize="{Binding FontSize}"                      
                       FontFamily="{Binding Font}"                    
                       FontWeight="Bold"
-                      ItemsSource="{Binding Rows}"
-                      Foreground="{Binding RowFontColor}"
+                      ItemsSource="{Binding Rows}"                      
                       CellStyle="{Binding CellStyle}"
                       SelectedItem="{Binding SelectedRow, Mode=TwoWay}"
                       SelectionUnit="FullRow"

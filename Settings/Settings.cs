@@ -5,6 +5,7 @@
         public bool RemoveInvalidRows { get; set; }
         public bool SaveColumnWidths { get; set; }
         public string Font;
+        public int FontSize;
         public System.Windows.Media.Brush RowHightlightColor;
         public System.Windows.Media.Brush RowFontColor;
 

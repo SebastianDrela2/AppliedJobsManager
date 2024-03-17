@@ -20,6 +20,16 @@ namespace AppliedJobsManager.Settings
         {
             _settings = _jsonSettingsManager.GetSettings();
         }
+
+        public int GetFontSize()
+        {
+            if (_settings.FontSize is not 0)
+            {
+                return _settings.FontSize;
+            }
+
+            return 15;
+        }
       
         public System.Windows.Media.FontFamily GetFontFamily()
         {

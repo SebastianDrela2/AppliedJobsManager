@@ -5,24 +5,24 @@ using AppliedJobsManager.Models;
 using AppliedJobsManager.Settings;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace AppliedJobsManager.ViewModels
 {
     public class AppliedJobsViewModel : ViewModelBase
     {
+        private Settings.Settings _settings;
         private ObservableCollection<Row> _rows;
         private Style _cellStyle;
         private System.Windows.Media.Brush _rowFontColor;
-        private System.Windows.Media.FontFamily _font;      
+        private System.Windows.Media.FontFamily _font;
+        private int _fontSize;
         
         private readonly JsonJobsManager _jsonJobsManager;
         private readonly JsonSettingsManager _jsonSettingsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
         private readonly InvalidRowsNotifier _invalidRowsNotifier;
-        private readonly SettingsLoader _settingsLoader;
-        private readonly Settings.Settings _settings;
+        private readonly SettingsLoader _settingsLoader;       
         
 
         public IList<Row> Rows
@@ -56,6 +56,16 @@ namespace AppliedJobsManager.ViewModels
                 OnPropertyChanged(nameof(Font));
             }
         }
+
+        public int FontSize
+        {
+            get => _fontSize;
+            set
+            {
+                _fontSize = value;
+                OnPropertyChanged(nameof(FontSize));
+            }
+        }
            
         public AppliedJobsViewModel() 
         {
@@ -67,12 +77,17 @@ namespace AppliedJobsManager.ViewModels
             _jsonSettingsManager = new JsonSettingsManager();
             _settingsLoader = new SettingsLoader(_jsonSettingsManager);
 
+            LoadSettings();
+            ConfigureCommands();
+        }
+
+        private void LoadSettings()
+        {
             _settings = _jsonSettingsManager.GetSettings();
             _cellStyle = _settingsLoader.GetCellStyle();
             _font = _settingsLoader.GetFontFamily();
+            _fontSize = _settingsLoader.GetFontSize();
             _rowFontColor = _settingsLoader.GetRowFontColor();
-
-            ConfigureCommands();
         }
         
         private void ConfigureCommands()
