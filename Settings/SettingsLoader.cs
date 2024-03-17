@@ -2,6 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using FontFamily = System.Windows.Media.FontFamily;
+using Brush = System.Windows.Media.Brush;
+using Color = System.Windows.Media.Color;
 
 namespace AppliedJobsManager.Settings
 {
@@ -31,14 +34,14 @@ namespace AppliedJobsManager.Settings
             return 15;
         }
       
-        public System.Windows.Media.FontFamily GetFontFamily()
+        public FontFamily GetFontFamily()
         {
             if (!string.IsNullOrEmpty(_settings.Font))
             {
-                return new System.Windows.Media.FontFamily(_settings.Font);
+                return new FontFamily(_settings.Font);
             }
 
-            return new System.Windows.Media.FontFamily("Arial");
+            return new FontFamily("Arial");
         }
 
         public Style GetCellStyle()
@@ -66,7 +69,7 @@ namespace AppliedJobsManager.Settings
             return cellStyle;
         }
 
-        public System.Windows.Media.Brush GetRowFontColor()
+        public Brush GetRowFontColor()
         {
             if (_settings.RowFontColor is not null)
             {
@@ -74,7 +77,7 @@ namespace AppliedJobsManager.Settings
             }
 
             // black brush default
-            return new SolidColorBrush(System.Windows.Media.Color.FromArgb(0,0,0,0));
+            return new SolidColorBrush(Color.FromArgb(0,0,0,0));
         }
 
         public List<double> GetColumnWidths() => _settings.JobsColumns;       
