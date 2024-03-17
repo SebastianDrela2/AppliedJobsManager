@@ -23,7 +23,7 @@ namespace AppliedJobsManager.HttpProcessing
             }
             
             var typeDiv = _divs!.First(x => x.InnerHtml == outerDivName);
-            var valueTypeIndex = _divs.IndexOf(typeDiv) + 1;
+            var valueTypeIndex = _divs!.IndexOf(typeDiv) + 1;
             var desiredDiv = _divs[valueTypeIndex];
            
             return desiredDiv.InnerHtml;
