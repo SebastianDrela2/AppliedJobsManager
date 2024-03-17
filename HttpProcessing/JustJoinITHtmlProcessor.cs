@@ -22,7 +22,7 @@ namespace AppliedJobsManager.HttpProcessing
                 return "N/A";
             }
             
-            var typeDiv = _divs.FirstOrDefault(x => x.InnerHtml == outerDivName);
+            var typeDiv = _divs!.First(x => x.InnerHtml == outerDivName);
             var valueTypeIndex = _divs.IndexOf(typeDiv) + 1;
             var desiredDiv = _divs[valueTypeIndex];
            
