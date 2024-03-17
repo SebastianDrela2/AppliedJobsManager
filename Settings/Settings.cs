@@ -1,4 +1,6 @@
-﻿namespace AppliedJobsManager.Settings
+﻿using Brush = System.Windows.Media.Brush;
+
+namespace AppliedJobsManager.Settings
 {
     public class Settings
     {
@@ -6,8 +8,8 @@
         public bool SaveColumnWidths { get; set; }
         public string Font;
         public int FontSize;
-        public System.Windows.Media.Brush RowHightlightColor;
-        public System.Windows.Media.Brush RowFontColor;
+        public Brush RowHightlightColor;
+        public Brush RowFontColor;
 
         public List<double> JobsColumns { get; set; }
         public Rectangle Window;
