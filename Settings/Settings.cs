@@ -10,7 +10,6 @@ namespace AppliedJobsManager.Settings
         public int FontSize;
         public Brush RowHightlightColor;
         public Brush RowFontColor;
-
         public List<double> JobsColumns { get; set; }
         public Rectangle Window;
     }
