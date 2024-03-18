@@ -33,7 +33,7 @@ public class JsonJobsManager : IJsonSettings
         return new ObservableCollection<Row>();
     }
 
-    public void SaveJobs(ObservableCollection<Row> dataItems)
+    public void SaveJobs(IList<Row> dataItems)
     {
         var json = JsonConvert.SerializeObject(dataItems);
         File.WriteAllText(_jsonAppDataPath, json);

@@ -92,11 +92,12 @@ namespace AppliedJobsManager.ViewModels
         
         private void ConfigureCommands()
         {
-            OnClosing = new ClosingAppliedJobsCommand(_jsonSettingsManager, _jsonJobsManager, _invalidRowsRemover, _invalidRowsNotifier, _rows);
+            OnClosing = new ClosingAppliedJobsCommand(_jsonSettingsManager, _jsonJobsManager, _invalidRowsRemover, _invalidRowsNotifier, this);
             OnSettingsClicked = new SettingsClickedCommand(_jsonSettingsManager, _settingsLoader, _settings, this);
             OnAddRow = new AddRowAppliedJobsCommand(this);
             OnRemoveRow = new RemoveRowAppliedJobsCommand(this);
             OnHelpClicked = new HelpClickedAppliedJobsCommand();
+            OnImportExcelClicked = new ImportExcelAppliedJobsCommand(this);
         }
 
         public ICommand OnClosing { get; private set; }
@@ -104,5 +105,6 @@ namespace AppliedJobsManager.ViewModels
         public ICommand OnAddRow { get; private set; }
         public ICommand OnRemoveRow { get; private set; }    
         public ICommand OnHelpClicked { get; private set; }
+        public ICommand OnImportExcelClicked { get; private set; }
     }
 }

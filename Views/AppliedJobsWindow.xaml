@@ -23,6 +23,7 @@
         <Grid Background="WhiteSmoke">
             <Menu>
                 <MenuItem Header="File">
+                    <MenuItem Header="Import Excel" Command="{Binding OnImportExcelClicked}"/>
                     <MenuItem Header="Exit"/>
                 </MenuItem>
                 <MenuItem Header="Settings" Command="{Binding OnSettingsClicked}"/>
