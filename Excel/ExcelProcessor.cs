@@ -56,15 +56,15 @@ namespace AppliedJobsManager.Excel
             {
                 return stringTablePart.SharedStringTable.ChildElements[int.Parse(value)].InnerText;
             }
-            else if (isDate)
+
+            if (isDate)
             {
                 var dateTimeValue = DateTime.FromOADate(double.Parse(cell.InnerText));
                 return dateTimeValue.ToString("yyyy-MM-dd");
             }
-            else
-            {
-                return value;
-            }
+
+            return value;
+
         }
     }
 }
