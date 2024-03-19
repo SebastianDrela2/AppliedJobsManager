@@ -1,9 +1,7 @@
 ﻿using AppliedJobsManager.DataManagement;
 using AppliedJobsManager.JsonProcessing;
-using AppliedJobsManager.Models;
 using AppliedJobsManager.ViewModels;
 using AppliedJobsManager.Views;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace AppliedJobsManager.Commands
