@@ -15,7 +15,6 @@ namespace AppliedJobsManager.ViewModels
         private Settings.Settings _settings;
         private ObservableCollection<Row> _rows;       
         private Style _cellStyle;
-        private System.Windows.Media.Brush _rowFontColor;
         private System.Windows.Media.FontFamily _font;
         private int _fontSize;
         
@@ -92,8 +91,7 @@ namespace AppliedJobsManager.ViewModels
             _settings = _jsonSettingsManager.GetSettings();
             _cellStyle = _settingsLoader.GetCellStyle();
             _font = _settingsLoader.GetFontFamily();
-            _fontSize = _settingsLoader.GetFontSize();
-            _rowFontColor = _settingsLoader.GetRowFontColor();
+            _fontSize = _settingsLoader.GetFontSize();            
         }
         
         private void ConfigureCommands()
