@@ -1,4 +1,5 @@
 ﻿using AppliedJobsManager.Excel;
+using AppliedJobsManager.HttpProcessing;
 using AppliedJobsManager.ViewModels;
 using System.Windows.Input;
 
@@ -32,6 +33,9 @@ namespace AppliedJobsManager.Commands
 
             var excelProcessor = new ExcelProcessor(fileName);
             var rows = excelProcessor.Process();
+
+            var rowsProcessor = new RowsProcessor(rows);
+            rowsProcessor.ProcessAdditionalInformation();
 
             _appliedJobsViewModel.Rows = rows;       
         }

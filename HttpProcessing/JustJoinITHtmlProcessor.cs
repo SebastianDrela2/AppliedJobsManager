@@ -5,36 +5,33 @@ using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 namespace AppliedJobsManager.HttpProcessing
 {
     public class JustJoinITHtmlProcessor
-    {        
-        private readonly string? _httpRequest;
-        private readonly HtmlNodeCollection? _divs;
-      
-        public JustJoinITHtmlProcessor(string httpLink)
-        {           
-            _httpRequest = GetRequest(httpLink);
-            _divs = GetAllDivs();
-        }
-
+    {
+        private HtmlNodeCollection? _divs;
         public string GetInnerDivHtml(string outerDivName)
         {
-            if (_httpRequest is null)
+            if (_divs != null)
             {
-                return "N/A";
+                var typeDiv = _divs!.First(x => x.InnerHtml == outerDivName);
+                var valueTypeIndex = _divs!.IndexOf(typeDiv) + 1;
+                var desiredDiv = _divs[valueTypeIndex];
+
+                return desiredDiv.InnerHtml;
             }
-            
-            var typeDiv = _divs!.First(x => x.InnerHtml == outerDivName);
-            var valueTypeIndex = _divs!.IndexOf(typeDiv) + 1;
-            var desiredDiv = _divs[valueTypeIndex];
-           
-            return desiredDiv.InnerHtml;
+
+            return @"N\A";
         }
 
-        private HtmlNodeCollection? GetAllDivs()
+        public void SetAllDivs(string httpRequest)
         {
-            if (_httpRequest is not null)
+            _divs = GetAllDivs(httpRequest);
+        }
+
+        public HtmlNodeCollection GetAllDivs(string httpRequest)
+        {
+            if (httpRequest is not null)
             {
                 var htmlDocument = new HtmlDocument();
-                htmlDocument.LoadHtml(_httpRequest);
+                htmlDocument.LoadHtml(httpRequest);
 
                 return htmlDocument.DocumentNode.SelectNodes("//div");
             }
@@ -42,7 +39,7 @@ namespace AppliedJobsManager.HttpProcessing
             return null;
         }
             
-        private string? GetRequest(string requestUri)
+        public string GetRequest(string requestUri)
         {
             var httpClient = new HttpClient();
 
@@ -52,7 +49,7 @@ namespace AppliedJobsManager.HttpProcessing
             }
             catch(Exception)
             {
-                return null;
+                return string.Empty;
             }
         }
     }

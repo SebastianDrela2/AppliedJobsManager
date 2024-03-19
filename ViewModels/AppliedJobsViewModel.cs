@@ -1,5 +1,6 @@
 ﻿using AppliedJobsManager.Commands;
 using AppliedJobsManager.DataManagement;
+using AppliedJobsManager.HttpProcessing;
 using AppliedJobsManager.JsonProcessing;
 using AppliedJobsManager.Models;
 using AppliedJobsManager.Settings;
@@ -12,7 +13,7 @@ namespace AppliedJobsManager.ViewModels
     public class AppliedJobsViewModel : ViewModelBase
     {
         private Settings.Settings _settings;
-        private ObservableCollection<Row> _rows;
+        private ObservableCollection<Row> _rows;       
         private Style _cellStyle;
         private System.Windows.Media.Brush _rowFontColor;
         private System.Windows.Media.FontFamily _font;
@@ -22,8 +23,9 @@ namespace AppliedJobsManager.ViewModels
         private readonly JsonSettingsManager _jsonSettingsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
         private readonly InvalidRowsNotifier _invalidRowsNotifier;
-        private readonly SettingsLoader _settingsLoader;       
-        
+        private readonly SettingsLoader _settingsLoader;
+        private readonly RowsProcessor _rowsProcessor;
+
 
         public IList<Row> Rows
         {
@@ -76,6 +78,10 @@ namespace AppliedJobsManager.ViewModels
             _invalidRowsNotifier = new InvalidRowsNotifier();
             _jsonSettingsManager = new JsonSettingsManager();
             _settingsLoader = new SettingsLoader(_jsonSettingsManager);
+            _rowsProcessor = new RowsProcessor(Rows);
+
+            _rowsProcessor.ProcessAdditionalInformation();
+            
 
             LoadSettings();
             ConfigureCommands();
