@@ -41,7 +41,7 @@ namespace AppliedJobsManager.HttpProcessing
             
         public string GetRequest(string requestUri)
         {
-            var httpClient = new HttpClient();
+            using var httpClient = new HttpClient();
 
             try
             {
