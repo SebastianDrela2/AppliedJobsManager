@@ -4,7 +4,7 @@ using AppliedJobsManager.ViewModels;
 using AppliedJobsManager.Views;
 using System.Windows.Input;
 
-namespace AppliedJobsManager.Commands
+namespace AppliedJobsManager.Commands.DataWindowCommands
 {
     internal class DataOnOkClickedCommand : ICommand
     {
@@ -14,12 +14,12 @@ namespace AppliedJobsManager.Commands
         public DataOnOkClickedCommand(AppliedJobsViewModel appliedJobsViewModel)
         {
             _appliedJobsViewModel = appliedJobsViewModel;
-        } 
+        }
 
-        public bool CanExecute(object? parameter) => true;       
+        public bool CanExecute(object? parameter) => true;
         public void Execute(object? parameter)
         {
-            var view = (DataWindow) parameter!;
+            var view = (DataWindow)parameter!;
             var newRow = new Row
             {
                 Link = view._linkTextbox.Text,

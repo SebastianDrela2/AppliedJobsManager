@@ -3,7 +3,7 @@ using AppliedJobsManager.HttpProcessing;
 using AppliedJobsManager.ViewModels;
 using System.Windows.Input;
 
-namespace AppliedJobsManager.Commands
+namespace AppliedJobsManager.Commands.AppliedJobsCommands
 {
     internal class ImportExcelAppliedJobsCommand : ICommand
     {
@@ -15,8 +15,8 @@ namespace AppliedJobsManager.Commands
         {
             _appliedJobsViewModel = appliedJobsViewModel;
         }
-     
-        public bool CanExecute(object? parameter) => true;      
+
+        public bool CanExecute(object? parameter) => true;
         public void Execute(object? parameter)
         {
             var dialog = new OpenFileDialog
@@ -31,13 +31,13 @@ namespace AppliedJobsManager.Commands
                 fileName = dialog.FileName;
             }
 
-            var excelProcessor = new ExcelProcessor(fileName);
-            var rows = excelProcessor.Process();
+            var excelProcessor = new ExcelProcessor();
+            var rows = excelProcessor.Import(fileName);
 
             var rowsProcessor = new RowsProcessor(rows);
             rowsProcessor.ProcessAdditionalInformation();
 
-            _appliedJobsViewModel.Rows = rows;       
+            _appliedJobsViewModel.Rows = rows;
         }
     }
 }

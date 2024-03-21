@@ -1,7 +1,7 @@
 ﻿using AppliedJobsManager.ViewModels;
 using System.Windows.Input;
 
-namespace AppliedJobsManager.Commands
+namespace AppliedJobsManager.Commands.AppliedJobsCommands
 {
     public class RemoveRowAppliedJobsCommand : ICommand
     {
@@ -14,7 +14,7 @@ namespace AppliedJobsManager.Commands
         }
 
         public bool CanExecute(object? parameter) => true;
-       
+
         public void Execute(object? parameter)
         {
             _appliedJobsViewModel.Rows.Remove(_appliedJobsViewModel.SelectedRow);

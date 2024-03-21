@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace AppliedJobsManager.Commands
+namespace AppliedJobsManager.Commands.SettingsCommands
 {
     public class SettingsRowFontTextboxClickedCommand : ICommand
     {
@@ -11,7 +11,7 @@ namespace AppliedJobsManager.Commands
         public bool CanExecute(object? parameter) => true;
         public void Execute(object? parameter)
         {
-            var view = (SettingsWindow) parameter!;
+            var view = (SettingsWindow)parameter!;
 
             var colorDialog = new ColorDialog();
 

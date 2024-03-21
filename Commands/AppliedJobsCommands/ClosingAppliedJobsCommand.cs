@@ -4,7 +4,7 @@ using AppliedJobsManager.ViewModels;
 using AppliedJobsManager.Views;
 using System.Windows.Input;
 
-namespace AppliedJobsManager.Commands
+namespace AppliedJobsManager.Commands.AppliedJobsCommands
 {
     public class ClosingAppliedJobsCommand : ICommand
     {
@@ -13,7 +13,7 @@ namespace AppliedJobsManager.Commands
         private readonly JsonSettingsManager _jsonSettingsManager;
         private readonly JsonJobsManager _jsonJobsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
-        private readonly InvalidRowsNotifier _invalidRowsNotifier;       
+        private readonly InvalidRowsNotifier _invalidRowsNotifier;
         private readonly AppliedJobsViewModel _appliedJobsViewModel;
 
         public ClosingAppliedJobsCommand
@@ -23,22 +23,22 @@ namespace AppliedJobsManager.Commands
             _jsonSettingsManager = jsonSettingsManager;
             _invalidRowsRemover = invalidRowsRemover;
             _invalidRowsNotifier = invalidRowsNotifier;
-            _jsonJobsManager = jsonJobsManager;           
+            _jsonJobsManager = jsonJobsManager;
             _appliedJobsViewModel = appliedJobsViewModel;
         }
         public bool CanExecute(object? parameter) => true;
-        
+
         public void Execute(object? parameter)
         {
             var settings = _jsonSettingsManager.GetSettings();
-            var view = (AppliedJobsView) parameter!;           
+            var view = (AppliedJobsView)parameter!;
 
             if (settings.RemoveInvalidRows)
             {
                 var previousItems = _appliedJobsViewModel.Rows.Cast<object>().ToList();
                 var invalidRows = _invalidRowsRemover.ManageInvalidRows();
 
-                _invalidRowsNotifier.Notify(invalidRows, previousItems);               
+                _invalidRowsNotifier.Notify(invalidRows, previousItems);
             }
 
             if (settings.SaveColumnWidths)

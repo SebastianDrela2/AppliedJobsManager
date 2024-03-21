@@ -1,4 +1,4 @@
-﻿using AppliedJobsManager.Commands;
+﻿using AppliedJobsManager.Commands.AppliedJobsCommands;
 using AppliedJobsManager.DataManagement;
 using AppliedJobsManager.HttpProcessing;
 using AppliedJobsManager.JsonProcessing;
@@ -97,11 +97,12 @@ namespace AppliedJobsManager.ViewModels
         private void ConfigureCommands()
         {
             OnClosing = new ClosingAppliedJobsCommand(_jsonSettingsManager, _jsonJobsManager, _invalidRowsRemover, _invalidRowsNotifier, this);
-            OnSettingsClicked = new SettingsClickedCommand(_jsonSettingsManager, _settingsLoader, _settings, this);
+            OnSettingsClicked = new SettingsClickedAppliedJobsCommand(_jsonSettingsManager, _settingsLoader, _settings, this);
             OnAddRow = new AddRowAppliedJobsCommand(this);
             OnRemoveRow = new RemoveRowAppliedJobsCommand(this);
             OnHelpClicked = new HelpClickedAppliedJobsCommand();
             OnImportExcelClicked = new ImportExcelAppliedJobsCommand(this);
+            OnExportExcelClicked = new ExportExcelAppliedJobsCommand(Rows);
         }
 
         public ICommand OnClosing { get; private set; }
@@ -110,5 +111,6 @@ namespace AppliedJobsManager.ViewModels
         public ICommand OnRemoveRow { get; private set; }    
         public ICommand OnHelpClicked { get; private set; }
         public ICommand OnImportExcelClicked { get; private set; }
+        public ICommand OnExportExcelClicked { get; private set; }
     }
 }

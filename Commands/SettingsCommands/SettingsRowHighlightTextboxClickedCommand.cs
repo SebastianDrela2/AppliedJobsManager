@@ -2,13 +2,13 @@
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace AppliedJobsManager.Commands
+namespace AppliedJobsManager.Commands.SettingsCommands
 {
     public class SettingsRowHighlightTextboxClickedCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
 
-        public bool CanExecute(object? parameter) => true;        
+        public bool CanExecute(object? parameter) => true;
         public void Execute(object? parameter)
         {
             var view = (SettingsWindow)parameter!;

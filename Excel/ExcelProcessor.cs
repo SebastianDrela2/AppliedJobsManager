@@ -5,18 +5,12 @@ using System.Collections.ObjectModel;
 namespace AppliedJobsManager.Excel
 {
     internal class ExcelProcessor
-    {
-        private readonly string _path;
-        public ExcelProcessor(string path)
-        {
-            _path = path;
-        }
-
-        public ObservableCollection<Models.Row> Process()
+    {            
+        public ObservableCollection<Models.Row> Import(string path)
         {
             var jobRows = new ObservableCollection<Models.Row>();
 
-            using var spreadsheetDocument = SpreadsheetDocument.Open(_path, false);
+            using var spreadsheetDocument = SpreadsheetDocument.Open(path, false);
 
             var workbookPart = spreadsheetDocument.WorkbookPart;
             var worksheetPart = workbookPart!.WorksheetParts.First();
@@ -45,6 +39,11 @@ namespace AppliedJobsManager.Excel
             spreadsheetDocument.Dispose();
 
             return jobRows;
+        }
+
+        public void Export()
+        {
+
         }
 
         private string GetCellValue(SpreadsheetDocument document, Cell cell, bool isDate = false)

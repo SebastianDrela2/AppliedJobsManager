@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using AppliedJobsManager.Views;
 
-namespace AppliedJobsManager.Commands
+namespace AppliedJobsManager.Commands.AppliedJobsCommands
 {
     public class AddRowAppliedJobsCommand : ICommand
     {
@@ -15,10 +15,10 @@ namespace AppliedJobsManager.Commands
 
         public event EventHandler? CanExecuteChanged;
 
-        public bool CanExecute(object? parameter) => true;        
+        public bool CanExecute(object? parameter) => true;
         public void Execute(object? parameter)
         {
-            _ = new DataWindow(_appliedJobsViewmodel);           
+            _ = new DataWindow(_appliedJobsViewmodel);
         }
     }
 }

@@ -24,6 +24,7 @@
             <Menu>
                 <MenuItem Header="File">
                     <MenuItem Header="Import Excel" Command="{Binding OnImportExcelClicked}"/>
+                    <MenuItem Header="Export Excel" Command="{Binding OnExportExcelClicked}"/>
                     <MenuItem Header="Exit"/>
                 </MenuItem>
                 <MenuItem Header="Settings" Command="{Binding OnSettingsClicked}"/>

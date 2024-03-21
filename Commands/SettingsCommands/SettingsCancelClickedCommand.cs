@@ -1,17 +1,17 @@
 ﻿using AppliedJobsManager.Views;
 using System.Windows.Input;
 
-namespace AppliedJobsManager.Commands
+namespace AppliedJobsManager.Commands.SettingsCommands
 {
-    internal class DataOnCancelClickedCommand : ICommand
+    public class SettingsCancelClickedCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
 
         public bool CanExecute(object? parameter) => true;
-        
+
         public void Execute(object? parameter)
         {
-            var view = (DataWindow) parameter!;
+            var view = (SettingsWindow)parameter!;
 
             view.Close();
         }

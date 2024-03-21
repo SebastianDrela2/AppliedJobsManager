@@ -4,9 +4,9 @@ using AppliedJobsManager.ViewModels;
 using AppliedJobsManager.Views;
 using System.Windows.Input;
 
-namespace AppliedJobsManager.Commands
+namespace AppliedJobsManager.Commands.AppliedJobsCommands
 {
-    public class SettingsClickedCommand : ICommand
+    public class SettingsClickedAppliedJobsCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
 
@@ -14,8 +14,8 @@ namespace AppliedJobsManager.Commands
         private readonly JsonSettingsManager _jsonSettingsManager;
         private readonly SettingsLoader _settingsLoader;
         private Settings.Settings _settings;
-        
-        public SettingsClickedCommand
+
+        public SettingsClickedAppliedJobsCommand
             (JsonSettingsManager jsonSettingsManager, SettingsLoader settingsLoader, Settings.Settings settings, AppliedJobsViewModel appliedJobsViewModel)
         {
             _jsonSettingsManager = jsonSettingsManager;

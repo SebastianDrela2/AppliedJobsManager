@@ -1,4 +1,4 @@
-﻿using AppliedJobsManager.Commands;
+﻿using AppliedJobsManager.Commands.DataWindowCommands;
 using System.Windows.Input;
 
 namespace AppliedJobsManager.ViewModels

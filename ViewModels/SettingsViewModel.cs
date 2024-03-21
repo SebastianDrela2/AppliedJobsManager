@@ -2,7 +2,7 @@
 using AppliedJobsManager.JsonProcessing;
 using AppliedJobsManager.Settings;
 using System.Windows.Input;
-using AppliedJobsManager.Commands;
+using AppliedJobsManager.Commands.SettingsCommands;
 
 namespace AppliedJobsManager.ViewModels
 {
