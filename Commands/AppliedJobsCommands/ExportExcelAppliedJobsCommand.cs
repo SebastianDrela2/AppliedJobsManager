@@ -39,7 +39,7 @@ namespace AppliedJobsManager.Commands.AppliedJobsCommands
                 }
 
                 workbookPart.Workbook.Save();
-                AnnounceExcelWasCreated();
+                AnnounceExcelWasCreated(dialog.FileName);
             }
         }
         
@@ -74,6 +74,7 @@ namespace AppliedJobsManager.Commands.AppliedJobsCommands
             sheetData.AppendChild(excelRow);
         }
 
-        private void AnnounceExcelWasCreated() => MessageBox.Show("Excel file created successfully.");
+        private void AnnounceExcelWasCreated(string filename) 
+            => MessageBox.Show($"Excel file created successfully.\n Saved file to {filename}");
     }
 }
