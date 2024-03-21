@@ -11,10 +11,7 @@ namespace AppliedJobsManager.Excel
             var jobRows = new ObservableCollection<Models.Row>();
 
             using var spreadsheetDocument = SpreadsheetDocument.Open(path, false);
-
-            var workbookPart = spreadsheetDocument.WorkbookPart;
-            var worksheetPart = workbookPart!.WorksheetParts.First();
-            var sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
+            var sheetData = CreateSheetData(spreadsheetDocument);
 
             foreach(var row in sheetData.Elements<Row>())
             {
@@ -41,9 +38,11 @@ namespace AppliedJobsManager.Excel
             return jobRows;
         }
 
-        public void Export()
+        private SheetData? CreateSheetData(SpreadsheetDocument spreadsheetDocument)
         {
-
+            var workbookPart = spreadsheetDocument.WorkbookPart;
+            var worksheetPart = workbookPart!.WorksheetParts.First();
+            return worksheetPart.Worksheet.Elements<SheetData>().First();
         }
 
         private string GetCellValue(SpreadsheetDocument document, Cell cell, bool isDate = false)
