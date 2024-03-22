@@ -23,9 +23,7 @@ namespace AppliedJobsManager.ViewModels
         private readonly JsonSettingsManager _jsonSettingsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
         private readonly InvalidRowsNotifier _invalidRowsNotifier;
-        private readonly SettingsLoader _settingsLoader;
-        private readonly RowsProcessor _rowsProcessor;
-
+        private readonly SettingsLoader _settingsLoader;      
 
         public IList<Row> Rows
         {
@@ -74,15 +72,14 @@ namespace AppliedJobsManager.ViewModels
             _jsonJobsManager = new JsonJobsManager();
             _rows = _jsonJobsManager.LoadJobs();
 
+            var rowsProcessor = new RowsProcessor(Rows);
+            rowsProcessor.ProcessAdditionalInformation();
+
             _invalidRowsRemover = new InvalidRowsRemover(_rows);
             _invalidRowsNotifier = new InvalidRowsNotifier();
             _jsonSettingsManager = new JsonSettingsManager();
             _settingsLoader = new SettingsLoader(_jsonSettingsManager);
-            _rowsProcessor = new RowsProcessor(Rows);
-
-            _rowsProcessor.ProcessAdditionalInformation();
-            
-
+                      
             LoadSettings();
             ConfigureCommands();
         }
