@@ -79,7 +79,7 @@
                     <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
                     <DataGridTextColumn Header="Work model" Binding="{Binding TypeOfWork}"/>
                     <DataGridTextColumn Header="Experience" Binding="{Binding Experience}"/>
-                    <DataGridTextColumn Header="EmploymentType" Binding="{Binding EmploymentType}"/>
+                    <DataGridTextColumn Header="Employment Type" Binding="{Binding EmploymentType}"/>
                     <DataGridTextColumn Header="Operating Mode" Binding="{Binding OperatingMode}"/>
                 </DataGrid.Columns>
                 
