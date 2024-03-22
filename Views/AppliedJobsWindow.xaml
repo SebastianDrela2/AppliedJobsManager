@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DataContext="AppliedJobsManager.ViewModels.AppliedJobsViewModel"
              d:DesignHeight="450" d:DesignWidth="800"
-             Title="JobManager" Height="450" Width="800" Closing="OnWindowClosing">
+             Title="AppliedJobManager" Height="450" Width="800" Closing="OnWindowClosing">
     
     <Window.Resources>
         <Style x:Key="CellTextStyle" TargetType="TextBlock">
@@ -41,11 +41,20 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
+                <RowDefinition Height="28"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="_buttonAddRow" Content="ADD ROW" Grid.Column="1" Command="{Binding OnAddRow}"/>
-            <Button x:Name="_buttonDeleteRow" Content="DELETE ROW" Grid.Column="3" Command="{Binding OnRemoveRow}"/>
+            <Button x:Name="_buttonAddRow" 
+                    Content="ADD ROW" 
+                    Grid.Column="1" 
+                    Command="{Binding OnAddRow}"
+                    Background="WhiteSmoke"/>
+            
+            <Button x:Name="_buttonDeleteRow" 
+                    Content="DELETE ROW" 
+                    Grid.Column="3" 
+                    Command="{Binding OnRemoveRow}"
+                    Background="WhiteSmoke"/>
         </Grid>
 
         <Grid>
