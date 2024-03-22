@@ -62,7 +62,7 @@ namespace AppliedJobsManager.Commands.AppliedJobsCommands
 
         private void AddRow(SheetData sheetData, Models.Row row)
         {
-            var excelRow = new DocumentFormat.OpenXml.Spreadsheet.Row();
+            var excelRow = new Row();
 
             excelRow.AppendChild(new Cell(new CellValue(row.Link)));
             excelRow.AppendChild(new Cell(new CellValue(row.Job)));
