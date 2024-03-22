@@ -52,5 +52,19 @@ namespace AppliedJobsManager.HttpProcessing
                 return string.Empty;
             }
         }
+
+        public async Task<string> GetRequestAsync(string requestUri)
+        {
+            using var httpClient = new HttpClient();
+
+            try
+            {
+                return await httpClient.GetStringAsync(requestUri);
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
     }
 }

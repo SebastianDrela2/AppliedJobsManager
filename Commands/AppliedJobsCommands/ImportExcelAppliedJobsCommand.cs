@@ -1,23 +1,19 @@
 ﻿using AppliedJobsManager.Excel;
 using AppliedJobsManager.HttpProcessing;
 using AppliedJobsManager.ViewModels;
-using System.Windows.Input;
 
 namespace AppliedJobsManager.Commands.AppliedJobsCommands
 {
-    internal class ImportExcelAppliedJobsCommand : ICommand
+    internal class ImportExcelAppliedJobsCommand
     {
         private readonly AppliedJobsViewModel _appliedJobsViewModel;
-
-        public event EventHandler? CanExecuteChanged;
-
+        
         public ImportExcelAppliedJobsCommand(AppliedJobsViewModel appliedJobsViewModel)
         {
             _appliedJobsViewModel = appliedJobsViewModel;
         }
-
-        public bool CanExecute(object? parameter) => true;
-        public void Execute(object? parameter)
+        
+        public async Task ExecuteAsync()
         {
             var dialog = new OpenFileDialog
             {
@@ -35,7 +31,7 @@ namespace AppliedJobsManager.Commands.AppliedJobsCommands
             var rows = excelProcessor.Import(fileName);
 
             var rowsProcessor = new RowsProcessor(rows);
-            rowsProcessor.ProcessAdditionalInformation();
+            await rowsProcessor.ProcessAdditionalInformationAsync();
 
             _appliedJobsViewModel.Rows = rows;
         }

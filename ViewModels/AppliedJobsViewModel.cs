@@ -1,4 +1,5 @@
-﻿using AppliedJobsManager.Commands.AppliedJobsCommands;
+﻿using AppliedJobsManager.Commands;
+using AppliedJobsManager.Commands.AppliedJobsCommands;
 using AppliedJobsManager.DataManagement;
 using AppliedJobsManager.HttpProcessing;
 using AppliedJobsManager.JsonProcessing;
@@ -100,8 +101,8 @@ namespace AppliedJobsManager.ViewModels
             OnSettingsClicked = new SettingsClickedAppliedJobsCommand(_jsonSettingsManager, _settingsLoader, _settings, this);
             OnAddRow = new AddRowAppliedJobsCommand(this);
             OnRemoveRow = new RemoveRowAppliedJobsCommand(this);
-            OnHelpClicked = new HelpClickedAppliedJobsCommand();
-            OnImportExcelClicked = new ImportExcelAppliedJobsCommand(this);
+            OnHelpClicked = new HelpClickedAppliedJobsCommand();           
+            OnImportExcelClicked = new DelegateCommand(new ImportExcelAppliedJobsCommand(this).ExecuteAsync);
             OnExportExcelClicked = new ExportExcelAppliedJobsCommand(Rows);
         }
 
