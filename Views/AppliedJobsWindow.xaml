@@ -56,9 +56,10 @@
                       FontWeight="Bold"
                       ItemsSource="{Binding Rows}"                      
                       CellStyle="{Binding CellStyle}"
-                      SelectedItem="{Binding SelectedRow, Mode=TwoWay}"
+                      SelectedItem="{Binding SelectedRow, Mode=TwoWay}"                    
                       SelectionUnit="FullRow"
-                      HeadersVisibility="All"                     
+                      HeadersVisibility="All"
+                      CommandManager.PreviewCanExecute="OnDataGridPreviewCanExecute"
                       >
                 
                 <DataGrid.Columns>

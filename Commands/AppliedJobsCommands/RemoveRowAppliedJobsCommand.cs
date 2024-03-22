@@ -1,10 +1,14 @@
 ﻿using AppliedJobsManager.ViewModels;
+using System.Windows;
 using System.Windows.Input;
+using MessageBox = System.Windows.MessageBox;
 
 namespace AppliedJobsManager.Commands.AppliedJobsCommands
 {
     public class RemoveRowAppliedJobsCommand : ICommand
     {
+        private const string MessageBoxMessage = "Are you sure you want to delete this row? \n This action cannot be reverted.";
+
         public event EventHandler? CanExecuteChanged;
         private readonly AppliedJobsViewModel _appliedJobsViewModel;
 
@@ -17,7 +21,12 @@ namespace AppliedJobsManager.Commands.AppliedJobsCommands
 
         public void Execute(object? parameter)
         {
-            _appliedJobsViewModel.Rows.Remove(_appliedJobsViewModel.SelectedRow);
+            var messageBoxResult = MessageBox.Show(MessageBoxMessage, "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (messageBoxResult is MessageBoxResult.Yes)
+            {
+                _appliedJobsViewModel.Rows.Remove(_appliedJobsViewModel.SelectedRow);
+            }
         }
     }
 }

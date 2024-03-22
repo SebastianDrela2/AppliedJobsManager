@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using AppliedJobsManager.JsonProcessing;
+using System.Windows.Input;
 
 namespace AppliedJobsManager.Views
 {
@@ -31,6 +32,15 @@ namespace AppliedJobsManager.Views
         {
             _viewModel.OnClosing.Execute(this);
         }
+        
+        private void OnDataGridPreviewCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (e.Command == DataGrid.DeleteCommand)
+            {
+                _viewModel.OnRemoveRow.Execute(null);
+                e.Handled = true;
+            }
+        }
 
         private void LoadColumnWidthsIfPossible(ObservableCollection<DataGridColumn> jobsColumns)
         {
@@ -52,6 +62,6 @@ namespace AppliedJobsManager.Views
                 Width = _settings.Window.Width;
                 Height = _settings.Window.Height;
             }
-        }
+        }       
     }
 }
