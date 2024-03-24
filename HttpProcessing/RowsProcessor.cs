@@ -1,5 +1,4 @@
 ﻿using AppliedJobsManager.Models;
-using System.Runtime.InteropServices;
 
 namespace AppliedJobsManager.HttpProcessing
 {
