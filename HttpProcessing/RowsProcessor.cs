@@ -1,4 +1,5 @@
 ﻿using AppliedJobsManager.Models;
+using System.Runtime.InteropServices;
 
 namespace AppliedJobsManager.HttpProcessing
 {
@@ -19,18 +20,7 @@ namespace AppliedJobsManager.HttpProcessing
             {
                 var row = _rows[i];
 
-                tasks[i] = Task.Run(() =>
-                {
-                    var htmlProcessor = HtmlProcessorFactory.CreateHtmlProcessor(row.Link);
-                    var httpRequest = htmlProcessor.GetRequest(row.Link);
-
-                    htmlProcessor.SetRequiredInformation(httpRequest);
-
-                    row.TypeOfWork = htmlProcessor.GetInnerHtml("Type of work");
-                    row.Experience = htmlProcessor.GetInnerHtml("Experience");
-                    row.EmploymentType = htmlProcessor.GetInnerHtml("Employment Type");
-                    row.OperatingMode = htmlProcessor.GetInnerHtml("Operating mode");
-                });
+                tasks[i] = Task.Run(() => PopulateRow(row));
             }
 
             Task.WaitAll(tasks);
@@ -43,22 +33,36 @@ namespace AppliedJobsManager.HttpProcessing
             for (var i = 0; i < _rows.Count; i++)
             {
                 var row = _rows[i];
-
-                tasks.Add(Task.Run(async () =>
-                {
-                    var htmlProcessor = HtmlProcessorFactory.CreateHtmlProcessor(row.Link);
-                    var httpRequest = await htmlProcessor.GetRequestAsync(row.Link);
-
-                    htmlProcessor.SetRequiredInformation(httpRequest);
-
-                    row.TypeOfWork = htmlProcessor.GetInnerHtml("Type of work");
-                    row.Experience = htmlProcessor.GetInnerHtml("Experience");
-                    row.EmploymentType = htmlProcessor.GetInnerHtml("Employment Type");
-                    row.OperatingMode = htmlProcessor.GetInnerHtml("Operating mode");
-                }));
+                tasks.Add(Task.Run(async () => await PopulateRowAsync(row)));                                 
             }
 
             await Task.WhenAll(tasks);
+        }
+
+        private void PopulateRow(Row row)
+        {
+            var htmlProcessor = HtmlProcessorFactory.CreateHtmlProcessor(row.Link);
+            var httpRequest = htmlProcessor.GetRequest(row.Link);
+
+            htmlProcessor.SetRequiredInformation(httpRequest);
+
+            row.TypeOfWork = htmlProcessor.GetInnerHtml("Type of work");
+            row.Experience = htmlProcessor.GetInnerHtml("Experience");
+            row.EmploymentType = htmlProcessor.GetInnerHtml("Employment Type");
+            row.OperatingMode = htmlProcessor.GetInnerHtml("Operating mode");
+        }
+
+        private async Task PopulateRowAsync(Row row)
+        {
+            var htmlProcessor = HtmlProcessorFactory.CreateHtmlProcessor(row.Link);
+            var httpRequest = await htmlProcessor.GetRequestAsync(row.Link);
+
+            htmlProcessor.SetRequiredInformation(httpRequest);
+
+            row.TypeOfWork = htmlProcessor.GetInnerHtml("Type of work");
+            row.Experience = htmlProcessor.GetInnerHtml("Experience");
+            row.EmploymentType = htmlProcessor.GetInnerHtml("Employment Type");
+            row.OperatingMode = htmlProcessor.GetInnerHtml("Operating mode");
         }
     }
 }

@@ -25,7 +25,7 @@ namespace AppliedJobsManager.Excel
                         Description = GetCellValue(spreadsheetDocument, cells[1]),
                         Job = GetCellValue(spreadsheetDocument, cells[2]),
                         Pay = GetCellValue(spreadsheetDocument, cells[3]),
-                        Date = GetCellValue(spreadsheetDocument, cells[4], true).Replace("-", "."),
+                        Date = GetCellValue(spreadsheetDocument, cells[4]).Replace("-", "."),
                     };
 
                     jobRows.Add(jobRow);
@@ -45,7 +45,7 @@ namespace AppliedJobsManager.Excel
             return worksheetPart.Worksheet.Elements<SheetData>().First();
         }
 
-        private string GetCellValue(SpreadsheetDocument document, Cell cell, bool isDate = false)
+        private string GetCellValue(SpreadsheetDocument document, Cell cell)
         {
             var stringTablePart = document.WorkbookPart.SharedStringTablePart;
             var value = cell.InnerText;
@@ -55,14 +55,7 @@ namespace AppliedJobsManager.Excel
                 return stringTablePart.SharedStringTable.ChildElements[int.Parse(value)].InnerText;
             }
 
-            if (isDate)
-            {
-                var dateTimeValue = DateTime.FromOADate(double.Parse(cell.InnerText));
-                return dateTimeValue.ToString("yyyy-MM-dd");
-            }
-
             return value;
-
         }
     }
 }

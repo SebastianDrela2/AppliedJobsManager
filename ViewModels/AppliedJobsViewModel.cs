@@ -94,12 +94,14 @@ namespace AppliedJobsManager.ViewModels
         
         private void ConfigureCommands()
         {
+            var importExcelCommand = new ImportExcelAppliedJobsCommand(this);
+
             OnClosing = new ClosingAppliedJobsCommand(_jsonSettingsManager, _jsonJobsManager, _invalidRowsRemover, _invalidRowsNotifier, this);
             OnSettingsClicked = new SettingsClickedAppliedJobsCommand(_jsonSettingsManager, _settingsLoader, _settings, this);
             OnAddRow = new AddRowAppliedJobsCommand(this);
             OnRemoveRow = new RemoveRowAppliedJobsCommand(this);
-            OnHelpClicked = new HelpClickedAppliedJobsCommand();           
-            OnImportExcelClicked = new DelegateCommand(new ImportExcelAppliedJobsCommand(this).ExecuteAsync);
+            OnHelpClicked = new HelpClickedAppliedJobsCommand();          
+            OnImportExcelClicked = new DelegateCommand(importExcelCommand.ExecuteAsync);
             OnExportExcelClicked = new ExportExcelAppliedJobsCommand(Rows);
         }
 

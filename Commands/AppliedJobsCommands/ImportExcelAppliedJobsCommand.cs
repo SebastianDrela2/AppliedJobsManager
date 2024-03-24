@@ -25,15 +25,15 @@ namespace AppliedJobsManager.Commands.AppliedJobsCommands
             if (dialog.ShowDialog() is DialogResult.OK)
             {
                 fileName = dialog.FileName;
+
+                var excelProcessor = new ExcelProcessor();
+                var rows = excelProcessor.Import(fileName);
+
+                var rowsProcessor = new RowsProcessor(rows);
+                await rowsProcessor.ProcessAdditionalInformationAsync();
+
+                _appliedJobsViewModel.Rows = rows;
             }
-
-            var excelProcessor = new ExcelProcessor();
-            var rows = excelProcessor.Import(fileName);
-
-            var rowsProcessor = new RowsProcessor(rows);
-            await rowsProcessor.ProcessAdditionalInformationAsync();
-
-            _appliedJobsViewModel.Rows = rows;
         }
     }
 }
