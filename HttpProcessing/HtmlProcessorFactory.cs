@@ -4,17 +4,12 @@
     {
         public static IHtmlProcessor CreateHtmlProcessor(string link)
         {
-            if (link.StartsWith("https://justjoin.it/"))
-            {
-                return new JustJoinITHtmlProcessor();
-            }
-            
-            if (link.StartsWith("https://www.pracuj.pl"))
-            {
-                return new PracujPlHtmlProcessor();
-            }
-
-            return new FakeHtmlProcessor();
+           return link switch
+           {
+              _ when link.StartsWith("https://justjoin.it/") => new JustJoinITHtmlProcessor(),
+              _ when link.StartsWith("https://www.pracuj.pl/") => new PracujPlHtmlProcessor(),
+               _ => new FakeHtmlProcessor()
+           };
         }
     }
 }
