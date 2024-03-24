@@ -1,70 +1,20 @@
 ﻿using HtmlAgilityPack;
-using System.Net.Http;
-using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace AppliedJobsManager.HttpProcessing
 {
-    public class JustJoinITHtmlProcessor
+    public class JustJoinITHtmlProcessor : HtmlProcessor, IHtmlProcessor
     {
         private HtmlNodeCollection? _divs;
-        public string GetInnerDivHtml(string outerDivName)
+
+        public string GetInnerHtml(string outerName)
         {
-            if (_divs != null)
-            {
-                var typeDiv = _divs!.First(x => x.InnerHtml == outerDivName);
-                var valueTypeIndex = _divs!.IndexOf(typeDiv) + 1;
-                var desiredDiv = _divs[valueTypeIndex];
+            var typeDiv = _divs!.First(x => x.InnerHtml == outerName);
+            var valueTypeIndex = _divs!.IndexOf(typeDiv) + 1;
+            var desiredDiv = _divs[valueTypeIndex];
 
-                return desiredDiv.InnerHtml;
-            }
-
-            return @"N\A";
+            return desiredDiv.InnerHtml;
         }
 
-        public void SetAllDivs(string httpRequest)
-        {
-            _divs = GetAllDivs(httpRequest);
-        }
-
-        public HtmlNodeCollection GetAllDivs(string httpRequest)
-        {
-            if (httpRequest is not null)
-            {
-                var htmlDocument = new HtmlDocument();
-                htmlDocument.LoadHtml(httpRequest);
-
-                return htmlDocument.DocumentNode.SelectNodes("//div");
-            }
-
-            return null;
-        }
-            
-        public string GetRequest(string requestUri)
-        {
-            using var httpClient = new HttpClient();
-
-            try
-            {
-                return httpClient.GetStringAsync(requestUri).Result;
-            }
-            catch(Exception)
-            {
-                return string.Empty;
-            }
-        }
-
-        public async Task<string> GetRequestAsync(string requestUri)
-        {
-            using var httpClient = new HttpClient();
-
-            try
-            {
-                return await httpClient.GetStringAsync(requestUri);
-            }
-            catch (Exception)
-            {
-                return string.Empty;
-            }
-        }
+        public void SetRequiredInformation(string httpRequest) => _divs = GetAllNodes(httpRequest, "div");      
     }
 }

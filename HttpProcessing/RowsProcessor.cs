@@ -5,6 +5,7 @@ namespace AppliedJobsManager.HttpProcessing
     internal class RowsProcessor
     {
         private readonly IList<Row> _rows;
+
         public RowsProcessor(IList<Row> rows)
         {
             _rows = rows;
@@ -20,15 +21,15 @@ namespace AppliedJobsManager.HttpProcessing
 
                 tasks[i] = Task.Run(() =>
                 {
-                    var htmlProcessor = new JustJoinITHtmlProcessor();
+                    var htmlProcessor = HtmlProcessorFactory.CreateHtmlProcessor(row.Link);
                     var httpRequest = htmlProcessor.GetRequest(row.Link);
 
-                    htmlProcessor.SetAllDivs(httpRequest);
+                    htmlProcessor.SetRequiredInformation(httpRequest);
 
-                    row.TypeOfWork = htmlProcessor.GetInnerDivHtml("Type of work");
-                    row.Experience = htmlProcessor.GetInnerDivHtml("Experience");
-                    row.EmploymentType = htmlProcessor.GetInnerDivHtml("Employment Type");
-                    row.OperatingMode = htmlProcessor.GetInnerDivHtml("Operating mode");
+                    row.TypeOfWork = htmlProcessor.GetInnerHtml("Type of work");
+                    row.Experience = htmlProcessor.GetInnerHtml("Experience");
+                    row.EmploymentType = htmlProcessor.GetInnerHtml("Employment Type");
+                    row.OperatingMode = htmlProcessor.GetInnerHtml("Operating mode");
                 });
             }
 
@@ -45,14 +46,15 @@ namespace AppliedJobsManager.HttpProcessing
 
                 tasks.Add(Task.Run(async () =>
                 {
-                    var htmlProcessor = new JustJoinITHtmlProcessor();
+                    var htmlProcessor = HtmlProcessorFactory.CreateHtmlProcessor(row.Link);
                     var httpRequest = await htmlProcessor.GetRequestAsync(row.Link);
-                    htmlProcessor.SetAllDivs(httpRequest);
 
-                    row.TypeOfWork = htmlProcessor.GetInnerDivHtml("Type of work");
-                    row.Experience = htmlProcessor.GetInnerDivHtml("Experience");
-                    row.EmploymentType = htmlProcessor.GetInnerDivHtml("Employment Type");
-                    row.OperatingMode = htmlProcessor.GetInnerDivHtml("Operating mode");
+                    htmlProcessor.SetRequiredInformation(httpRequest);
+
+                    row.TypeOfWork = htmlProcessor.GetInnerHtml("Type of work");
+                    row.Experience = htmlProcessor.GetInnerHtml("Experience");
+                    row.EmploymentType = htmlProcessor.GetInnerHtml("Employment Type");
+                    row.OperatingMode = htmlProcessor.GetInnerHtml("Operating mode");
                 }));
             }
 
