@@ -2,7 +2,7 @@
 
 ## Features
 
-- Perform CRUD operations on data from the justjoin.it website, accurately extracting HTTP feeds for WorkModel, Experience, EmploymentType, and OperatingMode.
+- Perform CRUD operations on data from the justjoin.it, PracujPl websites, accurately extracting HTTP feeds for WorkModel, Experience, EmploymentType, and OperatingMode.
 - Fields not applicable to justjoin.it/PracujPl data are clearly marked.
 - Customize the application window to suit individual preferences, including changing font and its color, as well as adjusting row highlighting.
 - Optionally remove invalid rows, such as outdated entries, null values, or those with pay not matching an integer.
