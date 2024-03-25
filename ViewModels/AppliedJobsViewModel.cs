@@ -8,6 +8,7 @@ using AppliedJobsManager.Settings;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using FontFamily = System.Windows.Media.FontFamily;
 
 namespace AppliedJobsManager.ViewModels
 {
@@ -16,7 +17,7 @@ namespace AppliedJobsManager.ViewModels
         private Settings.Settings _settings;
         private ObservableCollection<Row> _rows;       
         private Style _cellStyle;
-        private System.Windows.Media.FontFamily _font;
+        private FontFamily _font;
         private int _fontSize;
         
         private readonly JsonJobsManager _jsonJobsManager;
@@ -47,7 +48,7 @@ namespace AppliedJobsManager.ViewModels
             }
         }
         
-        public System.Windows.Media.FontFamily Font
+        public FontFamily Font
         {
             get => _font;
             set
