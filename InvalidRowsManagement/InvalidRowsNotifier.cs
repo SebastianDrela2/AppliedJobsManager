@@ -1,5 +1,6 @@
 ﻿using AppliedJobsManager.Models;
 using System.Text;
+using MessageBox = System.Windows.MessageBox;
 
 namespace AppliedJobsManager.DataManagement
 {
@@ -21,7 +22,7 @@ namespace AppliedJobsManager.DataManagement
                 stringBuilder.Append($"Removed Row {index + 1} because of {reason} {column} \n");
             }
             
-            System.Windows.MessageBox.Show(stringBuilder.ToString());
+            MessageBox.Show(stringBuilder.ToString());
         }
 
         public bool TryNotifyRow(Row row)
