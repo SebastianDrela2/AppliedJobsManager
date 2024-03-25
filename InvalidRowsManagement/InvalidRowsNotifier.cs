@@ -1,6 +1,6 @@
 ﻿using AppliedJobsManager.Models;
 using System.Text;
-using MessageBox = System.Windows.MessageBox;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace AppliedJobsManager.DataManagement
 {
