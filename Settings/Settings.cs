@@ -6,11 +6,12 @@ namespace AppliedJobsManager.Settings
     {
         public bool RemoveInvalidRows { get; set; }
         public bool SaveColumnWidths { get; set; }
+        public List<double> JobsColumns { get; set; }
+
         public string Font;
         public int FontSize;
         public Brush RowHightlightColor;
-        public Brush RowFontColor;
-        public List<double> JobsColumns { get; set; }
+        public Brush RowFontColor;       
         public Rectangle Window;
     }
 }
