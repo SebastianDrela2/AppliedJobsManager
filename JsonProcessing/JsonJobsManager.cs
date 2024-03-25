@@ -5,13 +5,13 @@ using System.IO;
 
 namespace AppliedJobsManager.JsonProcessing;
 
-public class JsonJobsManager : IJsonSettings
+public class JsonJobsManager : JsonDirectory
 {
     private readonly string _jsonAppDataPath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\JobsManager\jobs.json";
 
     public JsonJobsManager()
     {
-        CreateDirectoryIfDoesntExist();
+        CreateDirectoryIfDoesntExist(_jsonAppDataPath);
     }
 
     public ObservableCollection<Row> LoadJobs()
@@ -37,15 +37,5 @@ public class JsonJobsManager : IJsonSettings
     {
         var json = JsonConvert.SerializeObject(dataItems);
         File.WriteAllText(_jsonAppDataPath, json);
-    }
-
-    public void CreateDirectoryIfDoesntExist()
-    {
-        var aboveDir = Path.GetDirectoryName(_jsonAppDataPath);
-
-        if (!Directory.Exists(aboveDir))
-        {
-            Directory.CreateDirectory(aboveDir!);
-        }
     }
 }

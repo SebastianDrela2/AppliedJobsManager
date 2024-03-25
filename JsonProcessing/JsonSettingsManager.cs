@@ -3,13 +3,13 @@ using System.IO;
 
 namespace AppliedJobsManager.JsonProcessing
 {
-    public class JsonSettingsManager : IJsonSettings
+    public class JsonSettingsManager : JsonDirectory
     {
         private readonly string _jsonAppDataPath = @$"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\JobsManager\settings.json";
 
         public JsonSettingsManager()
         {
-            CreateDirectoryIfDoesntExist();
+            CreateDirectoryIfDoesntExist(_jsonAppDataPath);
         }
 
         public Settings.Settings GetSettings()
@@ -35,16 +35,6 @@ namespace AppliedJobsManager.JsonProcessing
         {
             var json = JsonConvert.SerializeObject(settings);
             File.WriteAllText(_jsonAppDataPath, json);
-        }
-
-        public void CreateDirectoryIfDoesntExist()
-        {
-            var aboveDir = Path.GetDirectoryName(_jsonAppDataPath);
-
-            if (!Directory.Exists(aboveDir))
-            {
-                Directory.CreateDirectory(aboveDir!);
-            }
-        }
+        }      
     }
 }
