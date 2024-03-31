@@ -11,7 +11,7 @@ namespace AppliedJobsManager.Commands.AppliedJobsCommands
 
         private void ShowHelp()
         {
-            MessageBox.Show($"Currently only for the feed we support links from the Justjoin.it \n" +
+            MessageBox.Show($"Currently only for the feed we support links from the Justjoin.it or Pracuj.pl \n" +
                 @"if site is different values will be displayed as not applicable.", "Help"
                 , MessageBoxButtons.OK, MessageBoxIcon.Question);
         }
