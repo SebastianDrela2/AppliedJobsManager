@@ -62,6 +62,11 @@ namespace AppliedJobsManager.Views
                 Width = _settings.Window.Width;
                 Height = _settings.Window.Height;
             }
-        }       
+        }
+
+        private void OnDataGridCellRightClicked(object sender, MouseButtonEventArgs e)
+        {
+            _viewModel.OnCellRightClickedCommand.Execute(e);
+        }
     }
 }

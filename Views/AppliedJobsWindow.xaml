@@ -73,6 +73,7 @@
                       SelectionUnit="FullRow"
                       HeadersVisibility="All"
                       CommandManager.PreviewCanExecute="OnDataGridPreviewCanExecute"
+                      PreviewMouseRightButtonDown="OnDataGridCellRightClicked"
                       >
                 
                 <DataGrid.Columns>

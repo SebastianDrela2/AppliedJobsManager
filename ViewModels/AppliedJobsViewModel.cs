@@ -104,6 +104,7 @@ namespace AppliedJobsManager.ViewModels
             OnHelpClicked = new HelpClickedAppliedJobsCommand();          
             OnImportExcelClicked = new DelegateCommand(importExcelCommand.ExecuteAsync);
             OnExportExcelClicked = new ExportExcelAppliedJobsCommand(Rows);
+            OnCellRightClickedCommand = new CellRightClickedCommand();
         }
 
         public ICommand OnClosing { get; private set; }
@@ -113,5 +114,6 @@ namespace AppliedJobsManager.ViewModels
         public ICommand OnHelpClicked { get; private set; }
         public ICommand OnImportExcelClicked { get; private set; }
         public ICommand OnExportExcelClicked { get; private set; }
+        public ICommand OnCellRightClickedCommand { get; private set; }
     }
 }
