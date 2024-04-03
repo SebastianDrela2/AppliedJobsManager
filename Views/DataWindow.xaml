@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"      
         mc:Ignorable="d"
-        Title="Data" Height="200" Width="310" WindowStartupLocation="CenterScreen">
+        Title="Data" Height="200" Width="310" WindowStartupLocation="CenterScreen" Icon="\Resources\taskIcon.png">
     <StackPanel>
       <Grid Margin="0 10 10 0">
         <Grid.ColumnDefinitions>
