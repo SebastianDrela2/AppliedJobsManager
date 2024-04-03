@@ -6,7 +6,11 @@
              mc:Ignorable="d" 
              d:DataContext="AppliedJobsManager.ViewModels.AppliedJobsViewModel"
              d:DesignHeight="450" d:DesignWidth="800"
-             Title="AppliedJobManager" Height="450" Width="800" Closing="OnWindowClosing">
+             Title="AppliedJobManager" 
+             Height="450" 
+             Width="800" 
+             Closing="OnWindowClosing"
+             Icon="\Resources\taskIcon.png">
     
     <Window.Resources>
         <Style x:Key="CellTextStyle" TargetType="TextBlock">
