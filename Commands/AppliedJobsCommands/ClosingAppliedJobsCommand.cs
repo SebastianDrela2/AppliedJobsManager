@@ -35,7 +35,7 @@ namespace AppliedJobsManager.Commands.AppliedJobsCommands
 
             if (settings.RemoveInvalidRows)
             {
-                var previousItems = _appliedJobsViewModel.Rows.Cast<object>().ToList();
+                var previousItems = _appliedJobsViewModel.Rows.ToList();
                 var invalidRows = _invalidRowsRemover.ManageInvalidRows();
 
                 _invalidRowsNotifier.Notify(invalidRows, previousItems);

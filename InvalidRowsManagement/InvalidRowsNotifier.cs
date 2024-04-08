@@ -6,7 +6,7 @@ namespace AppliedJobsManager.DataManagement
 {
     public class InvalidRowsNotifier
     {
-        public void Notify(List<Row> rows, List<object> collection)
+        public void Notify(List<Row> rows, List<Row> collection)
         {          
             var stringBuilder = new StringBuilder();
 
