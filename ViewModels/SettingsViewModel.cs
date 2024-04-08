@@ -3,6 +3,7 @@ using AppliedJobsManager.JsonProcessing;
 using AppliedJobsManager.Settings;
 using System.Windows.Input;
 using AppliedJobsManager.Commands.SettingsCommands;
+using Brush = System.Windows.Media.Brush;
 
 namespace AppliedJobsManager.ViewModels
 {
@@ -15,8 +16,8 @@ namespace AppliedJobsManager.ViewModels
         private readonly AppliedJobsViewModel _appliedJobsViewModel;
         private readonly Settings.Settings _settings;
         
-        private System.Windows.Media.Brush _rowHighlightColor;
-        private System.Windows.Media.Brush _rowFontColor;
+        private Brush _rowHighlightColor;
+        private Brush _rowFontColor;
         private bool _saveColumnWithsCheckboxEnabled;
         private string _selectedFont;
         private int _selectedFontSize;
@@ -36,8 +37,8 @@ namespace AppliedJobsManager.ViewModels
         }
       
         public List<string> Fonts => GetFonts();       
-        public System.Windows.Media.Brush RowHighlightColor => _rowHighlightColor;
-        public System.Windows.Media.Brush RowFontColor => _rowFontColor;
+        public Brush RowHighlightColor => _rowHighlightColor;
+        public Brush RowFontColor => _rowFontColor;
       
         public string SelectedFont
         {
