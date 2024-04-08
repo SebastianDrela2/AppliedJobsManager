@@ -5,7 +5,7 @@ namespace AppliedJobsManager.Utils
 {
     public static class DependencyObjectUtils
     {
-        public static T FindParent<T>(DependencyObject child) where T : DependencyObject
+        public static T? FindParent<T>(DependencyObject child) where T : DependencyObject
         {
             var parentObject = VisualTreeHelper.GetParent(child);
 
