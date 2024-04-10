@@ -21,21 +21,8 @@ namespace AppliedJobsManager.ViewModels
         private bool _saveColumnWithsCheckboxEnabled;
         private string _selectedFont;
         private int _selectedFontSize;
-        private bool _invalidCheckBoxEnabled;       
-
-        public SettingsViewModel
-            (JsonSettingsManager jsonSettingsManager, SettingsLoader 
-            settingsLoader, Settings.Settings settings, AppliedJobsViewModel appliedJobsViewModel)
-        {
-            _jsonSettingsManager = jsonSettingsManager;
-            _settingsLoader = settingsLoader;
-            _settings = settings;
-            _appliedJobsViewModel = appliedJobsViewModel;
-
-            ConfigureCommands();
-            SetUI();
-        }
-      
+        private bool _invalidCheckBoxEnabled;
+        
         public List<string> Fonts => GetFonts();       
         public Brush RowHighlightColor => _rowHighlightColor;
         public Brush RowFontColor => _rowFontColor;
@@ -73,7 +60,21 @@ namespace AppliedJobsManager.ViewModels
         public ICommand OkClicked { get; private set; }
         public ICommand CancelClicked { get; private set; }
         public ICommand RowHighlightTextBoxClicked { get; private set; }
-        public ICommand FontColorTextBoxClicked { get; private set; }       
+        public ICommand FontColorTextBoxClicked { get; private set; }
+
+        public SettingsViewModel
+            (JsonSettingsManager jsonSettingsManager, SettingsLoader
+            settingsLoader, Settings.Settings settings, AppliedJobsViewModel appliedJobsViewModel)
+        {
+            _jsonSettingsManager = jsonSettingsManager;
+            _settingsLoader = settingsLoader;
+            _settings = settings;
+            _appliedJobsViewModel = appliedJobsViewModel;
+
+            ConfigureCommands();
+            SetUI();
+        }
+
 
         private void ConfigureCommands()
         {
