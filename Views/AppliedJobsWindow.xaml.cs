@@ -37,7 +37,7 @@ namespace AppliedJobsManager.Views
         {
             if (e.Command == DataGrid.DeleteCommand)
             {
-                _viewModel.OnRemoveRow.Execute(null);
+                _viewModel.OnRemoveRowClicked.Execute(null);
                 e.Handled = true;
             }
         }

@@ -101,8 +101,8 @@ namespace AppliedJobsManager.ViewModels
 
             OnClosing = new ClosingAppliedJobsCommand(_jsonSettingsManager, _jobsUpdater, this);
             OnSettingsClicked = new SettingsClickedAppliedJobsCommand(_jsonSettingsManager, _settingsLoader, _settings, this);
-            OnAddRow = new AddRowAppliedJobsCommand(this);
-            OnRemoveRow = new RemoveRowAppliedJobsCommand(this);
+            OnAddRowClicked = new AddRowAppliedJobsCommand(this);
+            OnRemoveRowClicked = new RemoveRowAppliedJobsCommand(this);
             OnHelpClicked = new HelpClickedAppliedJobsCommand();          
             OnImportExcelClicked = new DelegateCommand(importExcelCommand.ExecuteAsync);
             OnExportExcelClicked = new ExportExcelAppliedJobsCommand(Rows);
@@ -112,8 +112,8 @@ namespace AppliedJobsManager.ViewModels
 
         public ICommand OnClosing { get; private set; }
         public ICommand OnSettingsClicked { get; private set; }
-        public ICommand OnAddRow { get; private set; }
-        public ICommand OnRemoveRow { get; private set; }    
+        public ICommand OnAddRowClicked { get; private set; }
+        public ICommand OnRemoveRowClicked { get; private set; }    
         public ICommand OnHelpClicked { get; private set; }
         public ICommand OnImportExcelClicked { get; private set; }
         public ICommand OnExportExcelClicked { get; private set; }

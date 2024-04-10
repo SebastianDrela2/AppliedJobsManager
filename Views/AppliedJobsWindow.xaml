@@ -52,13 +52,13 @@
             <Button x:Name="_buttonAddRow" 
                     Content="ADD ROW" 
                     Grid.Column="1" 
-                    Command="{Binding OnAddRow}"
+                    Command="{Binding OnAddRowClicked}"
                     Background="WhiteSmoke"/>
             
             <Button x:Name="_buttonDeleteRow" 
                     Content="DELETE ROW" 
                     Grid.Column="3" 
-                    Command="{Binding OnRemoveRow}"
+                    Command="{Binding OnRemoveRowClicked}"
                     Background="WhiteSmoke"/>
         </Grid>
 
