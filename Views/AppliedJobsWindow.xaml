@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DataContext="AppliedJobsManager.ViewModels.AppliedJobsViewModel"
              d:DesignHeight="450" d:DesignWidth="800"
-             Title="AppliedJobManager" 
+             Title="ITJobsManager" 
              Height="450" 
              Width="800" 
              Closing="OnWindowClosing"
