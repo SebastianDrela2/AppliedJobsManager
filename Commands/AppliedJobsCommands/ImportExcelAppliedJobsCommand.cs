@@ -20,12 +20,9 @@ namespace AppliedJobsManager.Commands.AppliedJobsCommands
                 Filter = "Excel Files (*.xls;*.xlsx)|*.xls;*.xlsx|All Files (*.*)|*.*"
             };
 
-            string fileName = string.Empty;
-
             if (dialog.ShowDialog() is DialogResult.OK)
             {
-                fileName = dialog.FileName;
-
+                var fileName = dialog.FileName;
                 var excelProcessor = new ExcelProcessor();
                 var rows = excelProcessor.Import(fileName);
 

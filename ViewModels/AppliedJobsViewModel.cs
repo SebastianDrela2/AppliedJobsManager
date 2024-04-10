@@ -32,7 +32,7 @@ namespace AppliedJobsManager.ViewModels
             get => _rows;           
             set 
             {
-                _rows = (ObservableCollection<Row>) value;
+                _rows = new ObservableCollection<Row>(value);
                 OnPropertyChanged(nameof(Rows));               
             }
         }
