@@ -1,6 +1,5 @@
 ﻿using AppliedJobsManager.Commands;
 using AppliedJobsManager.Commands.AppliedJobsCommands;
-using AppliedJobsManager.DataManagement;
 using AppliedJobsManager.HttpProcessing;
 using AppliedJobsManager.JsonProcessing;
 using AppliedJobsManager.Models;
