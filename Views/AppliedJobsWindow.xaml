@@ -67,6 +67,7 @@
         <Grid>
             <DataGrid x:Name="_dataGrid" 
                       AutoGenerateColumns="False"
+                      CanUserAddRows="False"
                       FontSize="{Binding FontSize}"                      
                       FontFamily="{Binding Font}"                    
                       FontWeight="Bold"
