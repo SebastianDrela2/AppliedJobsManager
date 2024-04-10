@@ -17,7 +17,7 @@ namespace AppliedJobsManager.DataManagement
 
             foreach(var row in rows)
             {
-                var (column, reason) = GetNotifyReason(row);
+                var (column, reason) = GetNotifyComponents(row);
                 var index = collection.IndexOf(row);
                 stringBuilder.Append($"Removed Row {index + 1} because of {reason} {column} \n");
             }
@@ -27,7 +27,7 @@ namespace AppliedJobsManager.DataManagement
 
         public bool TryNotifyRow(Row row)
         {
-            var (column, reason) = GetNotifyReason(row);
+            var (column, reason) = GetNotifyComponents(row);
 
             if (column is null && reason is NotifyReason.NullValue)
             {
@@ -40,7 +40,7 @@ namespace AppliedJobsManager.DataManagement
             return true;
         }
 
-        private (string?, NotifyReason) GetNotifyReason(Row row)
+        private (string?, NotifyReason) GetNotifyComponents(Row row)
         {
             if (row.Job is null)
             {
