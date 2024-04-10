@@ -65,7 +65,8 @@
         </Grid>
 
         <Grid>
-            <DataGrid x:Name="_dataGrid" 
+            <DataGrid x:Name="_dataGrid"
+                      IsReadOnly="True"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       FontSize="{Binding FontSize}"                      
