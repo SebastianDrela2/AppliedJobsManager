@@ -1,4 +1,4 @@
-# Job Manager
+# IT Job Manager
 
 ## Features
 
