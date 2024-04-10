@@ -1,31 +1,25 @@
 ﻿using AppliedJobsManager.Models;
-using AppliedJobsManager.ViewModels;
 
 namespace AppliedJobsManager.DataManagement
 {
     public class InvalidRowsRemover
     {
-        private readonly AppliedJobsViewModel _appliedJobsViewModel;
+        private readonly IList<Row> _rows;
 
-        public InvalidRowsRemover(AppliedJobsViewModel appliedJobsViewModel)
+        public InvalidRowsRemover(IList<Row> rows)
         {
-            _appliedJobsViewModel = appliedJobsViewModel;
+            _rows = rows;
         }
 
         public List<Row> ManageInvalidRows()
         {
-            var invalidRows = _appliedJobsViewModel.Rows.Where(IsInvalidRow).ToList();
+            var invalidRows = _rows.Where(IsInvalidRow).ToList();
 
             foreach (var invalidRow in invalidRows)
             {
-                _appliedJobsViewModel.Rows.Remove(invalidRow);
+                _rows.Remove(invalidRow);
             }
-
-            if (invalidRows.Count is not 0)
-            {
-                _appliedJobsViewModel.RowsAreOutdated = true;
-            }
-
+          
             return invalidRows;
         }
               

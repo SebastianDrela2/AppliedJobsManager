@@ -19,7 +19,7 @@ namespace AppliedJobsManager
             _jsonJobsManager = jsonJobsManager;
             _appliedJobsViewModel = appliedJobsViewModel;
 
-            _invalidRowsRemover = new InvalidRowsRemover(_appliedJobsViewModel);
+            _invalidRowsRemover = new InvalidRowsRemover(_appliedJobsViewModel.Rows);
             _invalidRowsNotifier = new InvalidRowsNotifier();
         }
 
