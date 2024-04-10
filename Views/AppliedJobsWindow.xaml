@@ -27,7 +27,7 @@
         <Grid Background="WhiteSmoke">
             <Menu>
                 <MenuItem Header="File">
-                    <MenuItem Header="Save" Command="{Binding OnSaveClicked}"/>
+                    <MenuItem Header="Save Jobs" Command="{Binding OnSaveClicked}"/>
                     <MenuItem Header="Import Excel" Command="{Binding OnImportExcelClicked}"/>
                     <MenuItem Header="Export Excel" Command="{Binding OnExportExcelClicked}"/>
                     <MenuItem Header="Exit"/>
