@@ -22,9 +22,7 @@ namespace AppliedJobsManager.ViewModels
 
         private readonly JobsUpdater _jobsUpdater;
         private readonly JsonJobsManager _jsonJobsManager;
-        private readonly JsonSettingsManager _jsonSettingsManager;
-        private readonly InvalidRowsRemover _invalidRowsRemover;
-        private readonly InvalidRowsNotifier _invalidRowsNotifier;
+        private readonly JsonSettingsManager _jsonSettingsManager;       
         private readonly SettingsLoader _settingsLoader;      
 
         public bool RowsAreOutdated;

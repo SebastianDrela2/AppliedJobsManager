@@ -70,7 +70,7 @@
                       FontSize="{Binding FontSize}"                      
                       FontFamily="{Binding Font}"                    
                       FontWeight="Bold"
-                      ItemsSource="{Binding Rows}"                      
+                      ItemsSource="{Binding Rows, Mode=TwoWay}"                      
                       CellStyle="{Binding CellStyle}"
                       SelectedItem="{Binding SelectedRow, Mode=TwoWay}"                    
                       SelectionUnit="FullRow"
