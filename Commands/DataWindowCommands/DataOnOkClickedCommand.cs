@@ -33,6 +33,8 @@ namespace AppliedJobsManager.Commands.DataWindowCommands
             if (!invalidRowsNotifier.TryNotifyRow(newRow))
             {
                 _appliedJobsViewModel.Rows.Add(newRow);
+                _appliedJobsViewModel.RowsAreOutdated = true;
+
                 view.Close();
             }
         }

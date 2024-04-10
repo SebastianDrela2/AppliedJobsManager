@@ -19,12 +19,15 @@ namespace AppliedJobsManager.ViewModels
         private Style _cellStyle;
         private FontFamily _font;
         private int _fontSize;
-        
+
+        private readonly JobsUpdater _jobsUpdater;
         private readonly JsonJobsManager _jsonJobsManager;
         private readonly JsonSettingsManager _jsonSettingsManager;
         private readonly InvalidRowsRemover _invalidRowsRemover;
         private readonly InvalidRowsNotifier _invalidRowsNotifier;
         private readonly SettingsLoader _settingsLoader;      
+
+        public bool RowsAreOutdated;
 
         public IList<Row> Rows
         {
@@ -32,7 +35,7 @@ namespace AppliedJobsManager.ViewModels
             set 
             {
                 _rows = (ObservableCollection<Row>) value;
-                OnPropertyChanged(nameof(Rows));
+                OnPropertyChanged(nameof(Rows));               
             }
         }
 
@@ -75,11 +78,10 @@ namespace AppliedJobsManager.ViewModels
 
             var rowsProcessor = new RowsProcessor(Rows);
             rowsProcessor.ProcessAdditionalInformation();
-
-            _invalidRowsRemover = new InvalidRowsRemover(_rows);
-            _invalidRowsNotifier = new InvalidRowsNotifier();
+        
             _jsonSettingsManager = new JsonSettingsManager();
             _settingsLoader = new SettingsLoader(_jsonSettingsManager);
+            _jobsUpdater = new JobsUpdater(_jsonSettingsManager, _jsonJobsManager, this);
                       
             LoadSettings();
             ConfigureCommands();
@@ -97,14 +99,15 @@ namespace AppliedJobsManager.ViewModels
         {
             var importExcelCommand = new ImportExcelAppliedJobsCommand(this);
 
-            OnClosing = new ClosingAppliedJobsCommand(_jsonSettingsManager, _jsonJobsManager, _invalidRowsRemover, _invalidRowsNotifier, this);
+            OnClosing = new ClosingAppliedJobsCommand(_jsonSettingsManager, _jobsUpdater, this);
             OnSettingsClicked = new SettingsClickedAppliedJobsCommand(_jsonSettingsManager, _settingsLoader, _settings, this);
             OnAddRow = new AddRowAppliedJobsCommand(this);
             OnRemoveRow = new RemoveRowAppliedJobsCommand(this);
             OnHelpClicked = new HelpClickedAppliedJobsCommand();          
             OnImportExcelClicked = new DelegateCommand(importExcelCommand.ExecuteAsync);
             OnExportExcelClicked = new ExportExcelAppliedJobsCommand(Rows);
-            OnCellRightClickedCommand = new CellRightClickedCommand();
+            OnCellRightClicked = new CellRightClickedAppliedJobsCommand();
+            OnSaveClicked = new SaveClickedAppliedJobsCommand(_jobsUpdater, this);
         }
 
         public ICommand OnClosing { get; private set; }
@@ -114,6 +117,7 @@ namespace AppliedJobsManager.ViewModels
         public ICommand OnHelpClicked { get; private set; }
         public ICommand OnImportExcelClicked { get; private set; }
         public ICommand OnExportExcelClicked { get; private set; }
-        public ICommand OnCellRightClickedCommand { get; private set; }
+        public ICommand OnCellRightClicked { get; private set; }
+        public ICommand OnSaveClicked { get; private set; }
     }
 }

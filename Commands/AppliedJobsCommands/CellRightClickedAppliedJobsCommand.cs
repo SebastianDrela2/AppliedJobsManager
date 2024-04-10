@@ -8,7 +8,7 @@ using TextBox = System.Windows.Controls.TextBox;
 
 namespace AppliedJobsManager.Commands.AppliedJobsCommands
 {
-    class CellRightClickedCommand : ICommand
+    class CellRightClickedAppliedJobsCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
 

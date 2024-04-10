@@ -26,6 +26,7 @@ namespace AppliedJobsManager.Commands.AppliedJobsCommands
             if (messageBoxResult is MessageBoxResult.Yes)
             {
                 _appliedJobsViewModel.Rows.Remove(_appliedJobsViewModel.SelectedRow);
+                _appliedJobsViewModel.RowsAreOutdated = true;
             }
         }
     }

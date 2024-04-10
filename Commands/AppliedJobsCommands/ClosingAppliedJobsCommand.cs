@@ -1,8 +1,11 @@
 ﻿using AppliedJobsManager.DataManagement;
 using AppliedJobsManager.JsonProcessing;
+using AppliedJobsManager.Utils;
 using AppliedJobsManager.ViewModels;
 using AppliedJobsManager.Views;
+using System.Windows;
 using System.Windows.Input;
+using MessageBox = System.Windows.MessageBox;
 
 namespace AppliedJobsManager.Commands.AppliedJobsCommands
 {
@@ -10,35 +13,38 @@ namespace AppliedJobsManager.Commands.AppliedJobsCommands
     {
         public event EventHandler? CanExecuteChanged;
 
-        private readonly JsonSettingsManager _jsonSettingsManager;
-        private readonly JsonJobsManager _jsonJobsManager;
-        private readonly InvalidRowsRemover _invalidRowsRemover;
-        private readonly InvalidRowsNotifier _invalidRowsNotifier;
+        private const string MessageBoxMessage = "Detected unsaved rows, Save modified rows?";
+
         private readonly AppliedJobsViewModel _appliedJobsViewModel;
+        private readonly JsonSettingsManager _jsonSettingsManager;               
+        private readonly JobsUpdater _jobsUpdater;
 
         public ClosingAppliedJobsCommand
-            (JsonSettingsManager jsonSettingsManager, JsonJobsManager jsonJobsManager,
-            InvalidRowsRemover invalidRowsRemover, InvalidRowsNotifier invalidRowsNotifier, AppliedJobsViewModel appliedJobsViewModel)
-        {
+            (JsonSettingsManager jsonSettingsManager, 
+            JobsUpdater jobsUpdater, AppliedJobsViewModel appliedJobsViewModel)
+        {          
             _jsonSettingsManager = jsonSettingsManager;
-            _invalidRowsRemover = invalidRowsRemover;
-            _invalidRowsNotifier = invalidRowsNotifier;
-            _jsonJobsManager = jsonJobsManager;
+            _jobsUpdater = jobsUpdater;
             _appliedJobsViewModel = appliedJobsViewModel;
         }
+
         public bool CanExecute(object? parameter) => true;
 
-        public void Execute(object? parameter)
-        {
+        public void Execute(object? parameter) => SaveData(parameter);
+        
+        private void SaveData(object? parameter)
+        {         
             var settings = _jsonSettingsManager.GetSettings();
             var view = (AppliedJobsView)parameter!;
 
-            if (settings.RemoveInvalidRows)
+            if (_appliedJobsViewModel.RowsAreOutdated)
             {
-                var previousItems = _appliedJobsViewModel.Rows.ToList();
-                var invalidRows = _invalidRowsRemover.ManageInvalidRows();
+                var messageBoxResult = MessageBox.Show(MessageBoxMessage, "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                _invalidRowsNotifier.Notify(invalidRows, previousItems);
+                if (messageBoxResult is MessageBoxResult.Yes)
+                {
+                    _jobsUpdater.UpdateJobs();
+                }
             }
 
             if (settings.SaveColumnWidths)
@@ -46,10 +52,9 @@ namespace AppliedJobsManager.Commands.AppliedJobsCommands
                 settings.JobsColumns = view._dataGrid.Columns.Select(x => x.ActualWidth).ToList();
             }
 
-            settings.Window = new Rectangle((int)view.Left, (int)view.Top, (int)view.Width, (int)view.Height);
+            settings.Window = RectangleUtils.GetRectangleFromWindow(view);
 
             _jsonSettingsManager.SaveSettings(settings);
-            _jsonJobsManager.SaveJobs(_appliedJobsViewModel.Rows);
-        }
+        }        
     }
 }

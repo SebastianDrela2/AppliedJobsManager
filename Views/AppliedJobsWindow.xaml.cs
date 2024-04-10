@@ -66,7 +66,7 @@ namespace AppliedJobsManager.Views
 
         private void OnDataGridCellRightClicked(object sender, MouseButtonEventArgs e)
         {
-            _viewModel.OnCellRightClickedCommand.Execute(e);
+            _viewModel.OnCellRightClicked.Execute(e);
         }
     }
 }
